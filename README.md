@@ -44,15 +44,67 @@ Goal: A flashcard app specifically for chinese vocabulary.
 
 ### **Frontend** (React)
 
-tbd
+1. Use React Router for navigation
+2. Use Axios to communicate with the backend.
+3. UseContext/UseState/UseReduce for state management
+
 
 ### **Backend** (Express)
 
-tbd
+#### Endpoints
+
+**Vocabulary Management**
+
+POST /api/v1/vocabulary: Add new vocabulary.
+GET /api/v1/vocabulary: Get all vocabulary.
+PUT /api/v1/vocabulary/:id: Update vocabulary.
+DELETE /api/v1/vocabulary/:id: Delete vocabulary.
+
+**Flashcard Set Management**
+
+POST /api/sets: Create a new set.
+GET /api/sets: Get all sets.
+GET /api/sets/:id: Get vocabulary from a specific set.
+PUT /api/sets/:id: Update a set.
+DELETE /api/sets/:id: Delete a set.
+
+**Quiz Functionality**
+GET /api/quiz/random?setId=<set_id>: Get random words from a set.
+GET /api/quiz/spaced-repetition?setId=<set_id>: Fetch words using an algorithm.
+
 
 ### **Database** (SQL)
 
-tbd
+Source Chinese vocabulary from here: [pleco-chinese-dictionary](https://github.com/jimmy-zhening-luo/pleco-mega-big-chinese-dictionary/blob/master/README.md)
+
+**Vocabulary Table**
+
+1. id (PRIMARY)  
+2. chinese (NOT NULL)  
+3. pinyin  
+4. english  
+5. radicals  
+6. frequency  
+7. stroke count  
+8. difficulty (HSK)  
+9. created_at TIMESTAMP
+10. updated_at TIMESTAMP
+
+**FlashcardSets Table**
+
+1. id (PRIMARY)  
+2. name (NOT NULL)  
+3. description  
+4. created_at TIMESTAMP  
+
+Vocabulary Table (many-to-many relationship)
+
+1. set_id REFERENCES flashcard_sets
+2. vocabulary_id REFERENCES vocabulary
+3. last_reviewed TIMESTAMP  
+4. review_interval INT  
+* PRIMARY KEY (set_id, vocabulary_id)
+
 
 
 
