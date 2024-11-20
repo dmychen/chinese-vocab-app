@@ -48,8 +48,13 @@ Goal: A flashcard app specifically for chinese vocabulary.
 2. Use Axios to communicate with the backend.
 3. UseContext/UseState/UseReduce for state management
 
+#### Pages
+
+TBD
 
 ### **Backend** (Express)
+
+Establish endpoints that allow frontend to communicate with and manipulate the sql db.
 
 #### Endpoints
 

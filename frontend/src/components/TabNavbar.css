@@ -1,0 +1,32 @@
+.tabs {
+    display: flex; /* Ensure the tabs are displayed in a row */
+    gap: 20px; /* Space between each tab */
+    border-bottom: 2px solid #333; /* Thin line under the tabs */
+    margin-bottom: 20px; /* Space between tabs and content */
+  }
+  
+  .tab {
+    padding: 10px 20px; /* Add padding to the tabs */
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-block; /* Ensures each tab stays on the same line */
+  }
+  
+  .tab:hover {
+    text-shadow: 1px 0px 0px black;
+  }
+  
+  .tab.selected {
+    text-shadow: 1px 0px 0px #333; /* Bold the text of the selected tab */
+    color: #333; /* Text color of the selected tab */
+  }
+  
+  .tab.selected::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #333; /* Line under the selected tab */
+    width: 100%;
+  }

@@ -1,0 +1,57 @@
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin: 0;
+  }
+  
+  .header-title {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .profile-btn {
+    padding: 10px 20px;
+    background-color: #555;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile-btn:hover {
+    background-color: #777;
+  }
+  
+  /* Profile Panel Styling */
+  .profile-panel {
+    position: absolute;
+    top: 60px;  /* Adjust the positioning depending on your header height */
+    right: 20px;
+    background-color: #444;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure the panel is above other content */
+    border-radius: 8px;
+  }
+  
+  .profile-panel button {
+    margin-top: 10px;
+    background-color: #777;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .profile-panel button:hover {
+    background-color: #999;
+  }
+  

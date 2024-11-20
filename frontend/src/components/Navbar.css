@@ -1,0 +1,83 @@
+/* Navbar container */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    background-color: #333;
+    color: white;
+    width: 60px; /* Adjusted for closed width */
+    height: 100vh;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    position: fixed; /* Ensures it stays fixed on the left */
+    z-index: 1000; /* Optional, to avoid overlapping */
+  }
+  
+
+  
+  
+  .navbar.open {
+    width: 200px; /* Open width */
+  }
+  
+  /* Toggle Button */
+  .toggle-btn {
+    background-color: #444;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #555;
+  }
+  
+  /* Nav list */
+  .nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* Nav item */
+  .nav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-item:hover {
+    background-color: #444;
+  }
+  
+  /* Nav link */
+  .nav-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    width: 100%;
+  }
+  
+  .nav-logo {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .nav-name {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  
+  /* Closed navbar: hide text */
+  .navbar.closed .nav-name {
+    display: none;
+  }
+  
