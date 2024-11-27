@@ -7,6 +7,7 @@ import Dictionary from "./pages/Dictionary";
 import Library from "./pages/Library";
 import Stats from "./pages/Stats";
 import Settings from "./pages/Settings";
+import Practice from "./pages/Practice"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/stats" element={<Stats />} />
+            <Route path="/practice/:id" element={<Practice />} />
           </Routes>
         </div>
       </div>

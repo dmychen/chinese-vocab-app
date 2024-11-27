@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import FlashcardSets from "../components/tabs/FlashcardSets";
-import Vocabulary from "../components/tabs/Vocabulary";
-import Characters from "../components/tabs/Characters";
-import Sentences from "../components/tabs/Sentences";
+import FlashcardSets from "../components/library_tabs/FlashcardSets";
+import Vocabulary from "../components/library_tabs/Vocabulary";
+import Characters from "../components/library_tabs/Characters";
+import Sentences from "../components/library_tabs/Sentences";
 import TabNavbar from "../components/TabNavbar"; // Import TabNavbar
 import "./Library.css"; // Styling
 
+// Display Flashcard Sets, Vocabulary Words, Characters, and Sentences
 function Library() {
   const [selectedTab, setSelectedTab] = useState("flashcards");
 
+  // Possible tabs
   const renderContent = () => {
     switch (selectedTab) {
       case "flashcards":

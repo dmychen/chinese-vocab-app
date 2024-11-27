@@ -1,0 +1,87 @@
+/* Main container */
+.practice-page-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header styles */
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.header .description {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Stats section */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #555;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Flashcard styles */
+.flashcard {
+    flex: 1;
+    height: 400px;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease-in-out, box-shadow 0.3s;
+}
+
+.flashcard.flipped {
+    transform: rotateY(180deg);
+    background: #fffbe6;
+}
+
+.flashcard:hover {
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Button column */
+.button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-column button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.button-column button:hover {
+    background-color: #0056b3;
+}
