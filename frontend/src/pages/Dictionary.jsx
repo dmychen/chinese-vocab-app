@@ -1,8 +1,12 @@
 import React from "react";
 import "./Dictionary.css";
 
+
+/*
+Dictionary page
+*/
 function Dictionary() {
-  // Sample word data for now (replace with dynamic data later)
+  // Dummy word data for now
   const words = [
     { id: 1, chinese: "你好", pinyin: "nǐ hǎo", definition: "hello" },
     { id: 2, chinese: "谢谢", pinyin: "xièxie", definition: "thank you" },
@@ -26,15 +30,15 @@ function Dictionary() {
 
       <div className="word-list">
         {words.map((word) => (
-          <WordItem key={word.id} word={word} />
+          <VocabItem key={word.id} word={word} />
         ))}
       </div>
     </div>
   );
 }
 
-// A reusable component for displaying a word in the dictionary
-function WordItem({ word }) {
+// display a single vocab
+function VocabItem({ word }) {
   return (
     <div className="word-item">
       <div className="word-chinese">{word.chinese}</div>

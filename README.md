@@ -80,7 +80,75 @@ GET /api/quiz/spaced-repetition?setId=<set_id>: Fetch words using an algorithm.
 
 ### **Database** (SQL)
 
-Source Chinese vocabulary from here: [pleco-chinese-dictionary](https://github.com/jimmy-zhening-luo/pleco-mega-big-chinese-dictionary/blob/master/README.md)
+CC-CEDICT Database: [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict)
+Extra Chinese vocabulary from here: [pleco-chinese-dictionary](https://github.com/jimmy-zhening-luo/pleco-mega-big-chinese-dictionary/blob/master/README.md)
+
+Parsing CC-CEDICT: [Python-Script](https://github.com/rubber-duck-dragon/rubber-duck-dragon.github.io/blob/master/cc-cedict_parser/parser.py)
+
+**Characters**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each character.
+- `character_simplified` *(VARCHAR(10))*: The simplified version of the character.
+- `character_traditional` *(VARCHAR(10))*: The traditional version of the character.
+- `radical_simplified` *(VARCHAR(10))*: The simplified version of the radical.
+- `radical_traditional` *(VARCHAR(10))*: The traditional version of the radical.
+- `stroke_count_simplified` *(INT)*: The number of strokes in the character.
+- `stroke_count_traditional` *(INT)*: The number of strokes in the character.
+- `difficulty` *(INT, NULL)*: Difficulty rating of the character (e.g., 1-5).
+- `meaning` *(TEXT, NULL)*: The meaning of the character.
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the character record was created.
+- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the character record was last updated.
+
+**Radicals**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each radical.
+- `simplified_radical` *(VARCHAR(10), NULL)*: Simplified version of the radical.
+- `traditional_radical` *(VARCHAR(10), NULL)*: Traditional version of the radical.
+- `meaning` *(TEXT, NULL)*: The meaning of the radical.
+- `stroke_count_simplified` *(INT)*: The number of strokes in the radical.
+- `stroke_count_traditional` *(INT)*: The number of strokes in the radical.
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the radical record was created.
+- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the radical record was last updated.
+
+**Vocabulary**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each vocabulary word.
+- `chinese_simplified` *(TEXT)*: Simplified version of the word.
+- `chinese_traditional` *(TEXT, NULL)*: Traditional version of the word.
+- `pinyin` *(VARCHAR(100), NULL)*: Pinyin pronunciation of the word.
+- `english` *(TEXT, NULL)*: The meaning of the word.
+- `frequency` *(INT, NULL)*: Frequency of the word’s occurrence.
+- `difficulty` *(INT, NULL)*: Difficulty rating of the character (e.g., 1-5).
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the vocabulary record was created.
+- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the vocabulary record was last updated.
+
+**Sets**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each vocabulary set.
+- `name` *(VARCHAR(255), NOT NULL)*: Name of the vocabulary set.
+- `description` *(TEXT, NULL)*: Description of the vocabulary set.
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the set was created.
+- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the set was last updated.
+
+**Vocabulary_Characters**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each character-vocabulary relationship.
+- `vocabulary_id` *(INT, NOT NULL)*: Foreign key linking to the vocabulary table.
+- `character_id` *(INT, NOT NULL)*: Foreign key linking to the characters table.
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the vocabulary-character record was created.
+
+**Set_Vocabulary**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each set-vocabulary relationship.
+- `set_id` *(INT, NOT NULL)*: Foreign key linking to the sets table.
+- `vocabulary_id` *(INT, NOT NULL)*: Foreign key linking to the vocabulary table.
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the set-vocabulary record was created.
+
+**Reviews**
+- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each review record.
+- `vocabulary_id` *(INT, NOT NULL)*: Foreign key linking to the vocabulary table.
+- `user_id` *(INT, NOT NULL)*: Foreign key linking to the users table.
+- `last_reviewed` *(TIMESTAMP, NULL)*: Timestamp of the last review.
+- `review_interval` *(INT, DEFAULT 1)*: Number of days until the next review (spaced repetition).
+- `review_score` *(INT, NULL)*: Score indicating how well the word was recalled (e.g., 1-5).
+- `view_count` *(INT, DEFAULT 0)*: Number of times the word has been reviewed.
+- `next_review_date` *(TIMESTAMP, NULL)*: Calculated date for the next review.
+- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the review record was created.
+- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the review record was last updated.
 
 **Vocabulary Table**
 
