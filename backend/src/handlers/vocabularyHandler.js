@@ -34,7 +34,7 @@ Req Body:
     "frequency": INT,
     "difficulty": DOUBLE,
     "pinyin": STRING,
-    "meaning": STRING
+    "english": STRING
     }
 
 Returns:
@@ -57,6 +57,14 @@ async function addVocabulary(req, res) {
         res.status(201).json({ id: insertId, message: 'Vocab added successfully' });
     } catch (error) {
         console.error(error);
+
+        // if duplicate
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res
+                .status(409)
+                .json({ error: 'This vocabulary is already in the set.' });
+        }
+
         res.status(500).json({ message: error.message });
     }
 }

@@ -1,4 +1,4 @@
-const pool = require('../db'); // get connection pool
+const pool = require('../db');
 
 // Fetch a character by ID
 async function fetchCharacterById(id) {
@@ -16,7 +16,7 @@ async function fetchAllCharacters() {
         SELECT * FROM Characters
     `;
     const [rows] = await pool.execute(query);
-    return rows; // Return the first row or undefined if not found
+    return rows;
 }
 
 /* 
@@ -24,15 +24,15 @@ Add a new character
     
 Params:
     characterData:
-        character_simplified: STRING
-        character_traditional: STRING
+        chinese_simplified: STRING
+        chinese_traditional: STRING
         radical_simplified: STRING
         radical_traditional: STRING 
         stroke_count_simplified: INT
         stroke_count_traditional: INT
         difficulty: DOUBLE
         pinyin: STRING
-        meaning: STRING
+        english: STRING
 
 Return: 
     insertID: id of inserted character
@@ -40,27 +40,27 @@ Return:
 async function addCharacter(characterData) {
     const query = `
         INSERT INTO Characters (
-            character_simplified, 
-            character_traditional, 
+            chinese_simplified, 
+            chinese_traditional, 
             radical_simplified, 
             radical_traditional, 
             stroke_count_simplified, 
             stroke_count_traditional, 
             difficulty, 
             pinyin,
-            meaning
+            english
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const values = [
-        characterData.character_simplified,
-        characterData.character_traditional,
+        characterData.chinese_simplified,
+        characterData.chinese_traditional,
         characterData.radical_simplified || null,
         characterData.radical_traditional || null,
         characterData.stroke_count_simplified || null,
         characterData.stroke_count_traditional || null,
         characterData.difficulty || null,
         characterData.pinyin,
-        characterData.meaning,
+        characterData.english,
     ];
 
     const [result] = await pool.execute(query, values);

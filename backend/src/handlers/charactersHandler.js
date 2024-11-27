@@ -25,19 +25,19 @@ async function fetchCharacter(req, res) {
 }
 
 /* 
-Add a new character
+Insert a new character
 
 Req Body:
     {
-    "character_simplified": STRING,
-    "character_traditional": STRING,
+    "chinese_simplified": STRING,
+    "chinese_traditional": STRING,
     "radical_simplified": STRING,
     "radical_traditional": STRING,
     "stroke_count_simplified": INT,
     "stroke_count_traditional": INT,
     "difficulty": DOUBLE,
     "pinyin": STRING,
-    "meaning": STRING
+    "english": STRING
     }
 
 Returns:
@@ -60,6 +60,14 @@ async function addCharacter(req, res) {
         res.status(201).json({ id: insertId, message: 'Character added successfully' });
     } catch (error) {
         console.error(error);
+
+         // Check for duplicate entry error
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res
+                .status(409)
+                .json({ error: 'This vocabulary is already in the set.' });
+        }
+
         res.status(500).json({ message: error.message });
     }
 }
@@ -67,14 +75,14 @@ async function addCharacter(req, res) {
 
 // Check if a JSON data object is a valid character entry
 function validateCharacterData(data) {
-    if (!data.character_simplified || typeof data.character_simplified !== 'string') {
-        return 'character_simplified is required and must be a string';
+    if (!data.chinese_simplified || typeof data.chinese_simplified !== 'string') {
+        return 'chinese_simplified is required and must be a string';
     }
-    if (!data.character_traditional || typeof data.character_traditional !== 'string') {
-        return 'character_traditional is required and must be a string';
+    if (!data.chinese_traditional || typeof data.chinese_traditional !== 'string') {
+        return 'chinese_traditional is required and must be a string';
     }
     if (data.radical_simplified !== undefined && typeof data.radical_simplified !== 'string') {
-        return 'radical_simplified must be a string if provided';
+        return 'radical_simplifiexd must be a string if provided';
     }
     if (data.radical_traditional !== undefined && typeof data.radical_traditional !== 'string') {
         return 'radical_traditional must be a string if provided';
@@ -91,8 +99,8 @@ function validateCharacterData(data) {
     if (!data.pinyin || typeof data.pinyin !== 'string') {
         return 'pinyin must be a string if provided';
     }
-    if (!data.meaning || typeof data.meaning !== 'string') {
-        return 'meaning is required and must be a string';
+    if (!data.english || typeof data.english !== 'string') {
+        return 'english is required and must be a string';
     }
 
     return null;
