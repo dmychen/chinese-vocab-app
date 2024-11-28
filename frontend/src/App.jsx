@@ -1,33 +1,45 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Dictionary from "./pages/Dictionary";
-import Library from "./pages/Library";
-import Stats from "./pages/Stats";
-import Settings from "./pages/Settings";
-import Practice from "./pages/Practice"
 
-function App() {
-  return (
-    <Router>
-      <div className="app-layout">
-        <Header />
-        <Navbar />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dictionary" element={<Dictionary />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/stats" element={<Stats />} />
-            <Route path="/practice/:id" element={<Practice />} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
-  );
+
+import Home from "./routes/Home";
+import Dictionary from "./routes/Dictionary";
+import Library from "./routes/Library/Library";
+import Stats from "./routes/Stats";
+import Settings from "./routes/Settings";
+import Practice from "./routes/Practice"
+import Root from "./routes/Root/Root"
+import FlashcardSets from "./routes/Library/FlashcardSets"
+import Vocabulary from "./routes/Library/Vocabulary";
+import Characters from "./routes/Library/Characters";
+import Sentences from "./routes/Library/Sentences";
+
+
+// Router singleton
+const router = createBrowserRouter([
+  { 
+    path: "/", 
+    element: <Root />,
+    children: [
+      { path: "home", element: <Home />, },
+      { path: "dictionary", element: <Dictionary />, },
+      { path: "library", element: <Library />, 
+        children: [
+          { path: "sets", element: <FlashcardSets />, },
+          { path: "vocabulary", element: <Vocabulary />, },
+          { path: "characters", element: <Characters />, },
+          { path: "sentences", element: <Sentences />, },
+        ],
+      },
+      { path: "settings", element: <Settings />, },
+      { path: "stats", element: <Stats />, },
+      { path: "practice/:set-id", element: <Practice />, },
+    ],
+
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;

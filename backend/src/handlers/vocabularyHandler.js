@@ -10,7 +10,7 @@ async function fetchVocabulary(req, res) {
             // If id is provided, fetch a specific character by id
             vocabulary = await vocabularyModel.fetchVocabularyById(id);
             if (!vocabulary) {
-                return res.status(404).json({ error: 'Character not found' });
+                return res.status(404).json({ error: 'Vocab not found' });
             }
         } else {
             // If no id is provided, fetch all vocabulary

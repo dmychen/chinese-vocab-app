@@ -1,0 +1,11 @@
+/* Match the width of the navbar */
+.content {
+margin-left: 60px;
+transition: margin-left 0.3s ease;
+}
+
+/* When navbar is open */
+.navbar.open + .content {
+margin-left: 200px; 
+}
+  

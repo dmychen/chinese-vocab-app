@@ -11,9 +11,9 @@ function Navbar() {
   };
 
   const navItems = [
-    { path: "/", name: "Home", logo: "🏠" },
+    { path: "/home", name: "Home", logo: "🏠" },
     { path: "/dictionary", name: "Dictionary", logo: "📖" },
-    { path: "/library", name: "Library", logo: "📚" },
+    { path: "/library/sets", name: "Library", logo: "📚" },
     { path: "/stats", name: "Stats", logo: "📊" },
     { path: "/settings", name: "Settings", logo: "⚙️" },
   ];

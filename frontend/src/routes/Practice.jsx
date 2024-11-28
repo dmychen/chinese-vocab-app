@@ -15,6 +15,7 @@ const Flashcard = ({ word, definition }) => {
     );
 };  
 
+
 const Practice = ({ set: propSet }) => {
     const location = useLocation();
     const set = propSet || location.state; // set data passed by prop or routing
