@@ -10,12 +10,9 @@
     height: 100vh;
     transition: width 0.3s ease;
     overflow: hidden;
-    position: fixed; /* Ensures it stays fixed on the left */
     z-index: 1000; /* Optional, to avoid overlapping */
   }
-  
 
-  
   
   .navbar.open {
     width: 200px; /* Open width */
@@ -44,26 +41,21 @@
     width: 100%;
   }
   
-  /* Nav item */
-  .nav-item {
-    width: 100%;
+  /* Closed navbar: hide text */
+  .navbar.closed .nav-name {
+    display: none;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: white; /* Default text color */
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-item:hover {
-    background-color: #444;
-  }
-  
-  /* Nav link */
-  .nav-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: white;
     width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease; /* Smooth transition for hover and active state */
   }
   
   .nav-logo {
@@ -72,12 +64,37 @@
   }
   
   .nav-name {
+    display: inline-block;
     font-size: 16px;
     white-space: nowrap;
   }
   
-  /* Closed navbar: hide text */
-  .navbar.closed .nav-name {
-    display: none;
+  .nav-link:hover {
+    color: #007bff; /* Highlight color on hover */
+    background-color: #c8d8e9; /* Light background on hover */
+    font-weight: bold; /* Bold text for active link */
+    border-radius: 5px; /* Optional: Rounded corners for the active link */
+  }
+  
+  /* Styles for the active link */
+  .nav-link.active {
+    color: #fff; /* White text for active state */
+    background-color: #007bff; /* Blue background for active state */
+    font-weight: bold; /* Bold text for active link */
+    border-radius: 5px; /* Optional: Rounded corners for the active link */
+  }
+  
+  .nav-link.active .nav-logo {
+    color: #fff; /* Change logo color when active */
+  }
+  
+  /* Optional: Styles for when the nav is open (if you have a toggle menu) */
+  .nav-name {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+  }
+  
+  .nav-link.active .nav-name {
+    opacity: 1; /* Show the name when active */
   }
   

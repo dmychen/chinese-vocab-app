@@ -7,12 +7,14 @@ import Navbar from "./Navbar";
 function Root() {
     return (
       <div className="app-layout">
-          <Header />
+        <Header />
+        <main className="main">
           <Navbar />
           <div className="content">
             <Outlet />
           </div>
-        </div>
+        </main>
+      </div>
     );
   }
   

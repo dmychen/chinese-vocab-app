@@ -14,31 +14,36 @@
       display: flex; /* Ensure the tabs are displayed in a row */
       gap: 20px; /* Space between each tab */
       border-bottom: 2px solid #333; /* Thin line under the tabs */
-      margin-bottom: 20px; /* Space between tabs and content */
     }
-    
+  
     .tab {
       padding: 10px 20px; /* Add padding to the tabs */
       cursor: pointer;
       font-size: 16px;
       text-align: center;
       transition: all 0.3s ease;
-      display: inline-block; /* Ensures each tab stays on the same line */
+      display: inline-block;
+    }
+
+    .tab-link {
+      display: block; /* Make the <NavLink> behave like a block-level element */
+      padding: 10px; /* Ensure the padding is inside the link */
+      text-decoration: none; /* Remove the underline */
+      color: inherit; /* Use the color of the <li> or other styles */
+      width: 100%; /* Ensure the link spans the entire width of the <li> */
+      height: 100%; /* Ensure the link spans the entire height of the <li> */
     }
     
-    .tab:hover {
-      text-shadow: 1px 0px 0px black;
+    .tab-link:hover {
+      color: #007bff; /* Highlight color on hover */
+      background-color: #c8d8e9; /* Light background on hover */
+      text-shadow: 1px 0px 0px #007bff; /* Bold text for active link */
+      border-radius: 5px; /* Optional: Rounded corners for the active link */
     }
     
-    .tab.selected {
-      text-shadow: 1px 0px 0px #333; /* Bold the text of the selected tab */
-      color: #333; /* Text color of the selected tab */
-    }
-    
-    .tab.selected::after {
-      content: "";
-      display: block;
-      height: 2px;
-      background-color: #333; /* Line under the selected tab */
-      width: 100%;
+    .tab-link.active {
+      background-color: #007bff; /* Highlight the active tab */
+      color: white; /* Make the text white for selected tab */
+      text-shadow: 1px 0px 0px white;
+      border-radius: 5px; /* Optional: Rounded corners for the active link */
     }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./Navbar.css"; // Import the CSS file for styling
 
@@ -26,11 +26,14 @@ function Navbar() {
       <ul className="nav-list">
         {navItems.map((item) => (
           <li key={item.name} className="nav-item">
-            <Link to={item.path} className="nav-link">
+            <NavLink 
+              to={item.path} 
+              className="nav-link"
+            >
               <span className="nav-logo">{item.logo}</span>
               {isOpen && <span className="nav-name">{item.name}</span>}
-            </Link>
-          </li>
+            </NavLink>
+        </li>
         ))}
       </ul>
     </div>

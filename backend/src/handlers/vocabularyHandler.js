@@ -31,8 +31,8 @@ Req Body:
     {
     "chinese_simplified": STRING,
     "chinese_traditional": STRING,
-    "frequency": INT,
-    "difficulty": DOUBLE,
+    "frequency": INT OR NULL,
+    "difficulty": DOUBLE OR NULL,
     "pinyin": STRING,
     "english": STRING
     }
@@ -52,9 +52,9 @@ async function addVocabulary(req, res) {
 
     // insert
     try {
-        const insertId = await vocabularyModel.addVocabulary(vocabularyData);
+        const vocabId = await vocabularyModel.addVocabulary(vocabularyData);
 
-        res.status(201).json({ id: insertId, message: 'Vocab added successfully' });
+        res.status(201).json({ id: vocabId, message: 'Vocab added successfully' });
     } catch (error) {
         console.error(error);
 

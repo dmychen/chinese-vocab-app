@@ -8,7 +8,6 @@ async function fetchSetVocabulary(req, res) {
         return res.status(400).json({ error: 'Set ID is required as a route paramter.' });
     }
 
-    console.log("set id", set_id)
     try {
         const vocabulary = await setVocabularyModel.fetchSetVocabulary(set_id);
 
@@ -24,7 +23,7 @@ async function fetchSetVocabulary(req, res) {
 }
 
 /* 
-Insert a new vocabulary-set relationship
+POST /api/v1/set/:set-id/vocabulary/Insert a new vocabulary-set relationship
 
 Req Body:
     {
@@ -36,16 +35,15 @@ Returns:
     500 INTERNAL ERROR: Error message
 */
 async function insertSetVocabulary(req, res) {
-    const { set_id } = req.params;
-    const { vocabulary_id } = req.body;
+    const { set_id, vocab_id } = req.params;
 
     // Validate input
-    if (!set_id || !vocabulary_id) {
+    if (!set_id || !vocab_id) {
         return res.status(400).json({ error: 'Set ID and Vocabulary ID are required.' });
     }
 
     try {
-        const result = await setVocabularyModel.insertSetVocabulary(set_id, vocabulary_id);
+        const result = await setVocabularyModel.insertSetVocabulary(set_id, vocab_id);
 
         res.status(201).json({
             message: 'Vocabulary successfully added to the set.',

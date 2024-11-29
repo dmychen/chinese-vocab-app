@@ -1,28 +1,117 @@
-const API_BASE_URL = "http://localhost:5001/api/v1";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:5001/api/v1", // BASE URl
+  timeout: 5000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 
-export async function getSets() {
+export const getSets = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/sets`);
-    if (!response.ok) {
-      throw new Error(`Error fetching sets: ${response.statusText}`);
-    }
-    return await response.json();
+    const response = await api.get("/sets");
+    return response.data;
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching sets:", error.response?.data || error.message);
+    throw error; // throw error for handling in components or loaders
+  }
+};
+
+export const getSetById = async (id) => {
+  try {
+    const response = await api.get(`/sets/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching set by ID:", error.response?.data || error.message);
     throw error;
   }
+};
+
+export const getSetVocabulary = async (setId) => {
+    try {
+      const response = await api.get(`/sets/${setId}/vocabulary`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching sets:", error.response?.data || error.message);
+      throw error; // throw error for handling in components or loaders
+    }
+};
+
+/* 
+Params:
+    set:
+        {
+        "name": STRING,
+        "description": STRING,
+        "user_id": INT
+        }
+*/
+export const insertSet = async (set) => {
+    try {
+        console.log("Inserting set:", set);
+        const response = await api.post(`/sets`, {
+            name: set.name,
+            description: set.description,
+            user_id: set.user_id,
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error inserting set:", error.message);
+        throw error;
+    }
 }
 
-export async function getSetById(setId) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/sets/${setId}`);
-    if (!response.ok) {
-      throw new Error(`Error fetching set: ${response.statusText}`);
+/* 
+Params:
+    vocab:
+         {
+        "chinese_simplified": STRING,
+        "chinese_traditional": STRING,
+        "frequency": INT OR NULL,
+        "difficulty": DOUBLE OR NULL,
+        "pinyin": STRING,
+        "english": STRING
+        }
+*/
+export const insertVocabulary = async (vocab) => {
+    try {
+        console.log("Inserting vocab:", vocab);
+        const response = await api.post(`/vocabulary`, {
+            chinese_simplified: vocab.chinese_simplified,
+            chinese_traditional: vocab.chinese_traditional,
+            frequency: vocab.frequency,
+            difficulty: vocab.difficulty,
+            pinyin: vocab.pinyin,
+            english: vocab.english,
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error inserting vocab:", error.message);
+        throw error;
     }
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+}
+
+/* 
+Params:
+    vocab:
+         {
+        "chinese_simplified": STRING,
+        "chinese_traditional": STRING,
+        "frequency": INT OR NULL,
+        "difficulty": DOUBLE OR NULL,
+        "pinyin": STRING,
+        "english": STRING
+        }
+*/
+export const insertSetVocabulary = async (setId, vocabId) => {
+    try {
+        console.log("Inserting vocab into set:", setId, vocabId);
+        const response = await api.post(`sets/${setId}/vocabulary/${vocabId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error inserting vocab:", error.message);
+        throw error;
+    }
 }

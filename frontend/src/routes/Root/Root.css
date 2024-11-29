@@ -1,11 +1,34 @@
 /* Match the width of the navbar */
-.content {
-margin-left: 60px;
-transition: margin-left 0.3s ease;
-}
-
-/* When navbar is open */
-.navbar.open + .content {
-margin-left: 200px; 
-}
+/* General Layout Styling */
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
   
+  .main {
+    display: flex;
+    flex: 1; /* Takes up remaining height after the header */
+    overflow: hidden; /* Prevent overflow when resizing */
+  }
+
+
+
+/* Content Area Styling */
+.content {
+    flex: 1; /* Takes up remaining space next to the navbar */
+    padding: 20px;
+    overflow-y: auto; /* Ensure scrollability if content overflows */
+    transition: margin 0.3s ease-in-out; /* Smooth resizing with navbar */
+  }
+  
+  /* Header Styling */
+.header {
+    height: 60px;
+    background-color: #444;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
