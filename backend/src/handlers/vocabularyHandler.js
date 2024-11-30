@@ -94,7 +94,38 @@ function validateVocabularyData(data) {
     return null;
 }
 
+/* 
+Search for vocabulary based on `query`. Returns vocabulary with chinese/english/pinyin that matches `query`.
+
+Request Params:
+    /api/v1/:search_field/:search_query
+
+Returns:
+    200 OK: Success message
+    500 INTERNAL ERROR: Error message
+*/
+async function searchVocabulary(req, res) {
+    const {search_field, search_query } = req.params;
+
+    // check if valid
+    if (!search_field || !search_query) {
+        return res.status(400).json({ message: "Invalid search field or query" });
+    }
+
+    // query for vocab
+    try {
+        const vocabulary = await vocabularyModel.searchVocabulary(search_query, search_field);
+
+        res.status(200).json({vocabulary});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
 module.exports = {
     fetchVocabulary,
     addVocabulary,
+    searchVocabulary,
 };

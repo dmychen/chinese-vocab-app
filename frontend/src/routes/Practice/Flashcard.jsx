@@ -12,8 +12,8 @@ const Flashcard = ({ vocab, flipped, setFlipped }) => {
         </div>
       ) : (
         <div className="flashcard back">
-          <div className="pinyin">{vocab.pinyin}</div>
           <div className="english">{vocab.english}</div>
+          <div className="pinyin">{vocab.pinyin}</div>
         </div>
       )}
     </div>

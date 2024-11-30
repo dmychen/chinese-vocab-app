@@ -115,3 +115,15 @@ export const insertSetVocabulary = async (setId, vocabId) => {
         throw error;
     }
 }
+
+// Function to fetch vocab from backend
+export const searchVocab = async (query) => {
+    console.log("Searching Vocab", query)
+    // try {
+    //   const response = await api.get(`/vocab/search/${query}`);
+    //     return response.data;
+    // } catch (error) {
+    //   console.error("Error searching for vocab:", error);
+    //   throw error;
+    // }
+  };

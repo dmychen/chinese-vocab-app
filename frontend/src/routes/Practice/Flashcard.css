@@ -58,13 +58,13 @@
     color: #666;
   }
   
-  .pinyin {
+  .english {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 10px;
   }
   
-  .english {
+  .pinyin {
     font-size: 1.2rem;
     font-style: italic;
   }

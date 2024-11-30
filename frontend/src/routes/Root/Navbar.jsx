@@ -12,7 +12,7 @@ function Navbar() {
 
   const navItems = [
     { path: "/home", name: "Home", logo: "🏠" },
-    { path: "/dictionary", name: "Dictionary", logo: "📖" },
+    { path: "/dictionary/search", name: "Dictionary", logo: "📖" },
     { path: "/library/sets", name: "Library", logo: "📚" },
     { path: "/stats", name: "Stats", logo: "📊" },
     { path: "/settings", name: "Settings", logo: "⚙️" },

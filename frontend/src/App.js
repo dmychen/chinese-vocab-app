@@ -13,6 +13,7 @@ import FlashcardSets, { loader as setsLoader, action as setAction } from "./rout
 import Vocabulary from "./routes/Library/Vocabulary";
 import Characters from "./routes/Library/Characters";
 import Sentences from "./routes/Library/Sentences";
+import SearchVocab, { loader as searchLoader, action as searchAction} from "./routes/SearchVocab";
 
 
 // Router for our website!!!! navigational logic happens here
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       { path: "home", element: <Home />, },
-      { path: "dictionary", element: <Dictionary />, },
+      { path: "dictionary", element: <Dictionary />, 
+        children: [
+          { path: "search", element: <SearchVocab />, loader: searchLoader, action: searchAction },
+        ],
+      },
       { path: "library", element: <Library />, 
         children: [
           { path: "sets", element: <FlashcardSets />, loader: setsLoader, action: setAction },

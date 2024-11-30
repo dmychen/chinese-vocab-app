@@ -16,7 +16,7 @@ async function fetchAllVocabulary() {
         SELECT * FROM vocabulary
     `;
     const [rows] = await pool.execute(query);
-    return rows; // Return the first row or undefined if not found
+    return rows;
 }
 
 /* 
@@ -58,8 +58,49 @@ async function addVocabulary(vocabularyData) {
     return result.insertId; // Return the new character's ID
 }
 
+// Search for vocabulary with chinese/pinyin/english that matches the `query`
+async function searchVocabulary(query, searchField = 'chinese_simplified') {
+    const validFields = ['chinese_simplified', 'chinese_traditional', 'pinyin', 'english'];
+
+    // Validate the searchField
+    if (!validFields.includes(searchField)) {
+        throw new Error(`Invalid search field: ${searchField}`);
+    }
+
+    let sqlQuery = '';
+    let params = [];
+
+    if (searchField === 'pinyin') {
+        // match query with or without tone numbers for pinyin
+        sqlQuery = `
+            SELECT * FROM vocabulary
+            WHERE REPLACE(pinyin, '1', '') 
+                  LIKE ? OR 
+                  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(pinyin, '1', ''), '2', ''), '3', ''), '4', ''), '5', '') LIKE ?
+        `;
+        params = [`%${query}%`, `%${query}%`];
+    } else {
+        // Standard query for other fields
+        sqlQuery = `
+            SELECT * FROM vocabulary
+            WHERE ${searchField} LIKE ?
+        `;
+        params = [`%${query}%`];
+    }
+
+    try {
+        const [rows] = await pool.execute(sqlQuery, params);
+        return rows; // Return all matching rows
+    } catch (error) {
+        console.error("Error searching vocabulary:", error);
+        throw error;
+    }
+}
+
+
 module.exports = {
     fetchVocabularyById,
     fetchAllVocabulary,
     addVocabulary,
+    searchVocabulary,
 };
