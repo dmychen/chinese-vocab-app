@@ -99,6 +99,7 @@ Search for vocabulary based on `query`. Returns vocabulary with chinese/english/
 
 Request Params:
     /api/v1/:search_field/:search_query
+        valid search_fields: 'chinese_simplified', 'chinese_traditional', 'pinyin', 'english'
 
 Returns:
     200 OK: Success message

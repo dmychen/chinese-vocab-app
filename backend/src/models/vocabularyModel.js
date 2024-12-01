@@ -60,6 +60,31 @@ async function addVocabulary(vocabularyData) {
 
 // Search for vocabulary with chinese/pinyin/english that matches the `query`
 async function searchVocabulary(query, searchField = 'chinese_simplified') {
+    let results;
+
+    // First try to search by the specified searchField
+    try {
+        results = await searchByField(query, searchField);
+        
+        // If no results are found and the searchField is "english", try "pinyin"
+        if (results.length === 0 && searchField === 'english') {
+            results = await searchByField(query, 'pinyin');
+        }
+        
+        // If no results are found and the searchField is "pinyin", try "english"
+        else if (results.length === 0 && searchField === 'pinyin') {
+            results = await searchByField(query, 'english');
+        }
+
+        // Return the results, which might be from the fallback search
+        return results;
+    } catch (error) {
+        console.error("Error during vocabulary search:", error);
+        throw error;
+    }
+}
+
+async function searchByField(query, searchField) {
     const validFields = ['chinese_simplified', 'chinese_traditional', 'pinyin', 'english'];
 
     // Validate the searchField

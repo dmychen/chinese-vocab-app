@@ -19,7 +19,7 @@ export async function loader() {
 export async function action({ request }) {
     const formData = await request.formData();
     const query = formData.get("query") || "";
-  
+    
     if (!query) return []; // Return an empty array if the query is empty
     try {
         const response = await searchVocab(query);
@@ -27,7 +27,7 @@ export async function action({ request }) {
         return [];
     } catch (error) {
         console.error("Error getting vocab from searchVocab():", error);
-        return new Response("Failed to fetch vocab", { status: 500 });
+        return [];
     }
 }
 
@@ -48,6 +48,10 @@ const SearchVocab = () => {
         formData.set("query", e.target.value);
         submit(formData, { method: "post" });
     };
+
+    const handleAddVocab = () => {
+        alert("this should make an edit vocab button to my right!")
+    } 
 
     // Handle clear search
     const clearSearch = () => {
@@ -79,7 +83,7 @@ const SearchVocab = () => {
             {/* Vocabulary List */}
             <div className="vocab-list">
                 {vocabList.length > 0 ? (
-                    vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} /> ))
+                    vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} handleAddVocab={handleAddVocab} /> ))
                     ) : (
                     <p>No vocab found</p>
                 )}

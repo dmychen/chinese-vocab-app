@@ -118,12 +118,21 @@ export const insertSetVocabulary = async (setId, vocabId) => {
 
 // Function to fetch vocab from backend
 export const searchVocab = async (query) => {
-    console.log("Searching Vocab", query)
-    // try {
-    //   const response = await api.get(`/vocab/search/${query}`);
-    //     return response.data;
-    // } catch (error) {
-    //   console.error("Error searching for vocab:", error);
-    //   throw error;
-    // }
+    let searchField = "english"
+    if (isChinese(query)) {
+      searchField = "chinese_simplified"
+    }
+    try {
+      const response = await api.get(`/vocabulary/${searchField}/${query}`);
+      return response.data.vocabulary;
+    } catch (error) {
+      console.error("Error searching for vocab:", error);
+      throw error;
+    }
   };
+
+// check if query is chinese
+function isChinese(str) {
+    const chineseRegex = /[\u4e00-\u9fff]/;
+    return chineseRegex.test(str);
+}

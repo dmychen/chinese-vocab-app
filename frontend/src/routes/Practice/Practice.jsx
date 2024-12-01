@@ -105,16 +105,17 @@ const Practice = () => {
             <div className="main-content">
                 
                 <div className="flashcard-column">
-                {currentVocab ? < Flashcard vocab={currentVocab} flipped={flipped} setFlipped={setFlipped} /> : <p>No Vocab in this Set</p>}
+                    {currentVocab ? < Flashcard vocab={currentVocab} flipped={flipped} setFlipped={setFlipped} /> : <p>No Vocab in this Set</p>}
+                    <button className="button" onClick={handleNextVocab}>
+                            Next
+                    </button>
                 </div>
 
                 <div className="button-column">
                     <Form method="post">
                         <button className="button" type="submit">Add Vocab</button>
                     </Form>
-                    <button className="button" onClick={handleNextVocab}>
-                        Next
-                    </button>
+                    
                 </div>
             </div>
         </div>

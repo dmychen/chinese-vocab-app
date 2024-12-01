@@ -47,7 +47,7 @@
     color: #444;
   }
   
-  .chinese {
+  .flashcard-chinese {
     font-size: 2.5rem;
     font-weight: bold;
   }
@@ -58,7 +58,7 @@
     color: #666;
   }
   
-  .english {
+  .flashcard-english {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 10px;
