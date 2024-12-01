@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSubmit, useLoaderData, useActionData } from "react-router-dom";
-import { searchVocab } from "../api/api";
-import Vocab from "./Vocab"
-import "./SearchVocab.css"
+import { DEFAULT_SET_ID, insertSetVocabulary, searchVocab } from "../../api/api";
+import Vocab from "../Vocab/Vocab"
+import "./VocabSearch.css"
 
 // get initial vocab on load
 export async function loader() {
@@ -31,26 +31,39 @@ export async function action({ request }) {
     }
 }
 
-const SearchVocab = () => {
+const VocabSearch = () => {
     const [searchQuery, setSearchQuery] = useState(""); // user search
+    const submit = useSubmit(); // Dynamically trigger loader/action
+
     const initialVocabList = useLoaderData(); // Data from the loader on page load
     const updatedVocabList = useActionData(); // Data from the action after a search
     const vocabList = updatedVocabList || initialVocabList; // Use dynamic data if available
-    const submit = useSubmit(); // Dynamically trigger loader/action
-    // const [loading, setLoading] = useState(false); // Loading state
 
-    // Handle input changes
+
+    // Handle changes to the search query
     const handleInputChange = (e) => {
         const newQuery = e.target.value;
-        setSearchQuery(newQuery); // Update the query state
+        setSearchQuery(newQuery); 
 
         const formData = new FormData();
         formData.set("query", e.target.value);
-        submit(formData, { method: "post" });
+        submit(formData, { method: "post" }); // call action() to update vocabList
     };
 
-    const handleAddVocab = () => {
-        alert("this should make an edit vocab button to my right!")
+    // `AddVocab` adds this vocab to the default set
+    const  handleAddVocab = async (e, vocab) => {
+        e.stopPropagation()
+        try {
+            // insert vocab into default set
+            const response = await insertSetVocabulary(DEFAULT_SET_ID, vocab.id) 
+
+            // force render update
+            const formData = new FormData();
+            formData.set("query", searchQuery);
+            submit(formData, { method: "post" }); 
+        } catch (error) {
+            console.error("Error inserting new vocab:", error)
+        }
     } 
 
     // Handle clear search
@@ -64,10 +77,10 @@ const SearchVocab = () => {
     };
 
     return (
-        <div className="search-vocab">
+        <div className="vocab-search">
             {/* Header */}
             <div className="search-header">
-                <button className="left-button">Left Action</button>
+                <button className="left-button" onClick={() => alert("This isn't implemented yet!")}>Left Action</button>
                 <input
                 type="text"
                 placeholder="Search vocabulary..."
@@ -83,7 +96,7 @@ const SearchVocab = () => {
             {/* Vocabulary List */}
             <div className="vocab-list">
                 {vocabList.length > 0 ? (
-                    vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} handleAddVocab={handleAddVocab} /> ))
+                    vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} handleAddVocab={handleAddVocab}/> ))
                     ) : (
                     <p>No vocab found</p>
                 )}
@@ -92,4 +105,4 @@ const SearchVocab = () => {
     );
 };
 
-export default SearchVocab;
+export default VocabSearch;

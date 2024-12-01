@@ -20,7 +20,7 @@ const router = express.Router();
     router.post('/sets', setHandler.insertSet); // Post new vocab
 
     // SetVocabulary routes
-    router.get('/sets/:set_id/vocabulary', setVocabularyHandler.fetchSetVocabulary); // Get all vocab for a particular set
+    router.get('/sets/:set_id/vocabulary/:vocab_id?', setVocabularyHandler.fetchSetVocabulary); // Get all vocab for a particular set
     router.post('/sets/:set_id/vocabulary/:vocab_id', setVocabularyHandler.insertSetVocabulary); // Post new vocab
     
 module.exports = router;

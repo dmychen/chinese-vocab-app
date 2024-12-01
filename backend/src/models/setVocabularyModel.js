@@ -12,6 +12,27 @@ async function fetchSetVocabulary(setId) {
     return rows;
 }
 
+async function fetchFromSetVocab(set_id, vocab_id) {
+    if (set_id === '-1') {
+        // Fetch globally if set_id is -1
+        const query = `SELECT v.* 
+            FROM vocabulary v
+            JOIN vocabulary_sets vs ON v.id = vs.vocabulary_id
+            WHERE vs.vocabulary_id = ?`;
+        const [rows] = await pool.execute(query, [vocab_id]);
+        return rows.length ? rows[0] : null;
+    } else {
+        // Fetch from specific set
+        const query = `
+            SELECT v.* 
+            FROM vocabulary v
+            JOIN vocabulary_sets vs ON v.id = vs.vocabulary_id
+            WHERE vs.set_id = ? AND v.id = ?`;
+        const [rows] = await pool.execute(query, [set_id, vocab_id]);
+        return rows.length ? rows[0] : null;
+    }
+}
+
 async function insertSetVocabulary(setId, vocabularyId) {
     // Insert relationship between this vocab and set
     const query = `
@@ -24,5 +45,6 @@ async function insertSetVocabulary(setId, vocabularyId) {
 
 module.exports = { 
     fetchSetVocabulary,
-    insertSetVocabulary 
+    insertSetVocabulary,
+    fetchFromSetVocab
 };

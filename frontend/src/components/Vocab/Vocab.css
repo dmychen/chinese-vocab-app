@@ -1,0 +1,123 @@
+.vocab-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.vocab-container.expanded {
+    background-color: #f9f9f9;
+  }
+
+.vocab-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vocab-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chinese {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.chinese-simplified {
+    margin-right: 5px;
+}
+
+.chinese-traditional {
+    font-style: italic;
+}
+
+.pinyin-english {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.pinyin {
+    font-size: 1rem;
+    color: #555;
+    margin-right: 4px;
+}
+
+.english {
+    font-size: 1rem;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 200px;
+    margin-left: 4px;
+}
+
+.vocab-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.add-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+.edit-button {
+    padding: 5px 10px;
+    background-color: #b7b7b7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.edit-button:hover {
+    background-color: #757575;
+}
+
+.vocab-expanded {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+  .close-button {
+    display: flex;
+    width: 10%;
+    justify-content: center;
+    margin-top: 0.5rem;
+    background-color: #ddd;
+    border: none;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    background-color: #bbb;
+  }

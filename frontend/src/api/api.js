@@ -1,14 +1,18 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5001/api/v1", // BASE URl
-  timeout: 5000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+    baseURL: "http://localhost:5001/api/v1", // BASE URl
+    timeout: 5000,
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
 
+// ID of default set vocab will be inserted into when not specified
+export const DEFAULT_SET_ID = 1;
 
+
+// Get a list of all sets
 export const getSets = async () => {
   try {
     const response = await api.get("/sets");
@@ -19,6 +23,7 @@ export const getSets = async () => {
   }
 };
 
+// Get a set by its setId
 export const getSetById = async (id) => {
   try {
     const response = await api.get(`/sets/${id}`);
@@ -29,6 +34,7 @@ export const getSetById = async (id) => {
   }
 };
 
+// Get the vocabulary corresponding to a particular setId
 export const getSetVocabulary = async (setId) => {
     try {
       const response = await api.get(`/sets/${setId}/vocabulary`);
@@ -40,6 +46,8 @@ export const getSetVocabulary = async (setId) => {
 };
 
 /* 
+Insert a new set
+
 Params:
     set:
         {
@@ -64,9 +72,11 @@ export const insertSet = async (set) => {
 }
 
 /* 
+Insert a new vocabulary entry
+
 Params:
     vocab:
-         {
+        {
         "chinese_simplified": STRING,
         "chinese_traditional": STRING,
         "frequency": INT OR NULL,
@@ -74,6 +84,9 @@ Params:
         "pinyin": STRING,
         "english": STRING
         }
+      
+Returns:
+
 */
 export const insertVocabulary = async (vocab) => {
     try {
@@ -95,19 +108,13 @@ export const insertVocabulary = async (vocab) => {
 
 /* 
 Params:
-    vocab:
-         {
-        "chinese_simplified": STRING,
-        "chinese_traditional": STRING,
-        "frequency": INT OR NULL,
-        "difficulty": DOUBLE OR NULL,
-        "pinyin": STRING,
-        "english": STRING
-        }
+  {
+    setId: Set to insert into
+    vocabId: vocab to insert into set
+  }
 */
 export const insertSetVocabulary = async (setId, vocabId) => {
     try {
-        console.log("Inserting vocab into set:", setId, vocabId);
         const response = await api.post(`sets/${setId}/vocabulary/${vocabId}`);
         return response.data;
     } catch (error) {
@@ -135,4 +142,26 @@ export const searchVocab = async (query) => {
 function isChinese(str) {
     const chineseRegex = /[\u4e00-\u9fff]/;
     return chineseRegex.test(str);
+}
+
+// Check if a vocab object is contained within the "vocabulary_sets" table
+export const isSavedVocab = async (vocab) => {
+  if (!vocab || !vocab.id) {
+    throw new Error('Invalid vocab object');
+  }
+
+  try {
+    const response = await api.get(`/sets/-1/vocabulary/${vocab.id}`);
+    return true;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      // If it's a 404, return false
+      return false;
+    } else {
+      // Throw an error for any other status codes
+      throw new Error(
+        `Unexpected error occurred: ${error.response?.status || error.message}`
+      );
+    }
+  }
 }

@@ -43,7 +43,7 @@ function TabNavbar() {
       </li>
       <li className="tab">
         <NavLink 
-          to="Sentences" 
+          to="sentences" 
           className="tab-link"
         >
           Sentences

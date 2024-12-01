@@ -2,18 +2,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import './App.css';
 
-import Home from "./routes/Home";
-import Dictionary from "./routes/Dictionary";
-import Library from "./routes/Library/Library";
-import Stats from "./routes/Stats";
-import Settings from "./routes/Settings";
-import Practice, { loader as practiceLoader, action as practiceAction } from "./routes/Practice/Practice"
-import Root from "./routes/Root/Root"
-import FlashcardSets, { loader as setsLoader, action as setAction } from "./routes/Library/FlashcardSets"
-import Vocabulary from "./routes/Library/Vocabulary";
-import Characters from "./routes/Library/Characters";
-import Sentences from "./routes/Library/Sentences";
-import SearchVocab, { loader as searchLoader, action as searchAction} from "./routes/SearchVocab";
+import Home from "./pages/Home";
+import Dictionary from "./pages/Dictionary";
+import Library from "./pages/Library/Library";
+import Stats from "./pages/Stats";
+import Settings from "./pages/Settings";
+import Practice, { loader as practiceLoader, action as practiceAction } from "./pages/Practice/Practice"
+import Root from "./layouts/Root"
+import FlashcardSets, { loader as setsLoader, action as setAction } from "./pages/Library/FlashcardSets"
+import Vocabulary from "./pages/Library/Vocabulary";
+import Characters from "./pages/Library/Characters";
+import Sentences from "./pages/Library/Sentences";
+import VocabSearch, { loader as searchLoader, action as searchAction} from "./components/VocabSearch/VocabSearch";
 
 
 // Router for our website!!!! navigational logic happens here
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { path: "home", element: <Home />, },
       { path: "dictionary", element: <Dictionary />, 
         children: [
-          { path: "search", element: <SearchVocab />, loader: searchLoader, action: searchAction },
+          { path: "search", element: <VocabSearch />, loader: searchLoader, action: searchAction },
         ],
       },
       { path: "library", element: <Library />, 

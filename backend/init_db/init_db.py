@@ -1,6 +1,7 @@
 import mysql.connector
+import parser
 
-# Define your database connection
+# Define our database connection
 db_connection = mysql.connector.connect(
     host='127.0.0.1',
     user="root", 
@@ -12,27 +13,14 @@ db_connection = mysql.connector.connect(
 # Create a cursor object to interact with the database
 cursor = db_connection.cursor()
 
-# Sample data (replace this with the list returned by your script)
-cc_cedict_data = [
-    {
-        "traditional": "你",
-        "simplified": "你",
-        "pinyin": "nihao",
-        "english": "hello"
-    },
-    {
-        "traditional": "把",
-        "simplified": "把",
-        "pinyin": "ba3",
-        "english": "idk man"
-    }
-]
+# Parse cc_cedict data into a list
+cc_cedict_data = parser.parse_dictionary('cc-cedict_src.txt')
 
-# Function to insert data into the characters table
-def insert_character(data):
+# insert data into the vocab table
+def insert_vocab(data):
     # Prepare the SQL query for insertion
-    query = """
-    INSERT INTO characters (character_traditional, character_simplified, pinyin, meaning)
+    vocabQuery = """
+    INSERT INTO vocabulary (chinese_traditional, chinese_simplified, pinyin, english)
     VALUES (%s, %s, %s, %s)
     """
     
@@ -40,10 +28,10 @@ def insert_character(data):
     traditional = data["traditional"]
     simplified = data["simplified"]
     pinyin = data["pinyin"] # Remove the square brackets from pinyin
-    definition = data["english"]
-    print(f"-> trad: {traditional}, simp: {simplified}, pinyin: {pinyin}, def: {definition}")
+    english = data["english"]
+    print(f"-> trad: {traditional}, simp: {simplified}, pinyin: {pinyin}, english: {english}")
     # Execute the insertion
-    cursor.execute(query, (traditional, simplified, pinyin, definition))
+    cursor.execute(vocabQuery, (traditional, simplified, pinyin, english))
     
     # Commit the transaction
     db_connection.commit()
@@ -51,7 +39,7 @@ def insert_character(data):
 # Iterate over each entry and insert it into the database
 print("--Adding Entries--")
 for entry in cc_cedict_data:
-    insert_character(entry)
+    insert_vocab(entry)
 
 # Close the cursor and connection after the operation
 cursor.close()

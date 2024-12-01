@@ -11,7 +11,6 @@ list_of_dicts = []
 def parse_line(line):
     parsed = {}
     if line == '':
-        dict_lines.remove(line)
         return 0
     line = line.rstrip('/')
     line = line.split('/')
@@ -26,8 +25,8 @@ def parse_line(line):
     pinyin = char_and_pinyin[1]
     pinyin = pinyin.rstrip()
     pinyin = pinyin.rstrip("]")
-    parsed['traditional'] = traditional
-    parsed['simplified'] = simplified
+    parsed['chinese_traditional'] = traditional
+    parsed['chinese_simplified'] = simplified
     parsed['pinyin'] = pinyin
     parsed['english'] = english
     list_of_dicts.append(parsed)

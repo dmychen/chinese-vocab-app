@@ -3,27 +3,27 @@
     font-family: Arial, sans-serif;
   }
   
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    }
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  }
 
-    .tabs {
-      display: flex; /* Ensure the tabs are displayed in a row */
-      gap: 20px; /* Space between each tab */
-      border-bottom: 2px solid #333; /* Thin line under the tabs */
-    }
+.tabs {
+  display: flex; /* Ensure the tabs are displayed in a row */
+  gap: 20px; /* Space between each tab */
+  border-bottom: 2px solid #333; /* Thin line under the tabs */
+}
   
-    .tab {
-      padding: 10px 20px; /* Add padding to the tabs */
-      cursor: pointer;
-      font-size: 16px;
-      text-align: center;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
+.tab {
+  padding: 10px 20px; /* Add padding to the tabs */
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
 
     .tab-link {
       display: block; /* Make the <NavLink> behave like a block-level element */
