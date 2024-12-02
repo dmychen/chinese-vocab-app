@@ -17,8 +17,10 @@
     border-radius: 4px;
   }
   
-  .left-button,
-  .right-button {
+  .paginate-back-btn,
+  .paginate-forward-btn,
+  .clear-button,
+  .input-type-button {
     padding: 0.5rem 1rem;
     background-color: #4caf50;
     color: white;

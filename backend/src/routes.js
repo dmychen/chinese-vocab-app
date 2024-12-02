@@ -13,7 +13,7 @@ const router = express.Router();
     // Vocabulary routes
     router.get('/vocabulary/:id?', vocabularyHandler.fetchVocabulary); // Get vocabulary by id, or all vocab if no id supplied
     router.post('/vocabulary', vocabularyHandler.addVocabulary); // Post new vocab
-    router.get('/vocabulary/:search_field/:search_query', vocabularyHandler.searchVocabulary); // Search for vocab
+    router.get('/vocabulary/search/:search_field/:search_query/:search_count/:search_offset', vocabularyHandler.searchVocabulary); // Search for vocab
 
     // Set routes
     router.get('/sets/:id?', setHandler.fetchSet); // Get vocabulary by id, or all vocab if no id supplied

@@ -24,7 +24,7 @@ async function fetchSet(req, res) {
 }
 
 /* 
-Insert a new set
+POST /api/v1/sets/ Insert a new set
 
 Req Body:
     {

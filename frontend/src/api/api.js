@@ -1,4 +1,6 @@
 import axios from "axios";
+import { DEFAULT_SEARCH_INPUT_TYPE, DEFAULT_SEARCH_PAGE_SIZE } from "../components/globals";
+
 
 const api = axios.create({
     baseURL: "http://localhost:5001/api/v1", // BASE URl
@@ -8,8 +10,7 @@ const api = axios.create({
     },
 });
 
-// ID of default set vocab will be inserted into when not specified
-export const DEFAULT_SET_ID = 1;
+
 
 
 // Get a list of all sets
@@ -124,13 +125,14 @@ export const insertSetVocabulary = async (setId, vocabId) => {
 }
 
 // Function to fetch vocab from backend
-export const searchVocab = async (query) => {
-    let searchField = "english"
+export const searchVocab = async (query, count = DEFAULT_SEARCH_PAGE_SIZE, offset = 0, searchField = DEFAULT_SEARCH_INPUT_TYPE) => {
+    let field = searchField;
     if (isChinese(query)) {
-      searchField = "chinese_simplified"
+      field = "chinese_simplified"
     }
     try {
-      const response = await api.get(`/vocabulary/${searchField}/${query}`);
+        console.log("SEARCHING FOR:", query, field, count, offset)
+      const response = await api.get(`/vocabulary/search/${field}/${query}/${count}/${offset}`);
       return response.data.vocabulary;
     } catch (error) {
       console.error("Error searching for vocab:", error);

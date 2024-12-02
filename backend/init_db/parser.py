@@ -34,7 +34,7 @@ def parse_line(line):
 def remove_surnames():
     for x in range(len(list_of_dicts)-1, -1, -1):
         if "surname " in list_of_dicts[x]['english']:
-            if list_of_dicts[x]['traditional'] == list_of_dicts[x+1]['traditional']:
+            if list_of_dicts[x]['chinese_traditional'] == list_of_dicts[x+1]['chinese_traditional']:
                 list_of_dicts.pop(x)
 
 def parse_dictionary(file_path):

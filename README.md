@@ -1,6 +1,23 @@
 # Devx Full Stack Project!  
 
-What is the game plan...  
+## Running this App
+
+### Initialize the MySQL database
+
+1) Create a new database in MySQL Workbench or whatever service you are using.
+2) Initialize the database: 
+- Edit `init_db.py`, at the bottom of the script you can specify the root, user, password, and database name for the database you made.
+- Run `python3 init_db.py`.
+3) Import data into the database:
+- Edit `import_data.py`, at the top of the script you can specify the root, user, etc...
+- Run `python3 import_data.py`. This may take a few seconds
+
+> I created a few options for `import_data.py`, since the import is rather large. You can specify the following:  
+> `-v` to show verbose output, listing every vocab entry that is added.
+> `--count NUM` to specify the number of entries to import (cap the vocab imported to a certain number).
+> `-f FILE` to specify a file to import data from. The data must be formatted according to the cc-cedict model.
+
+### 
 
 ## The Idea
 

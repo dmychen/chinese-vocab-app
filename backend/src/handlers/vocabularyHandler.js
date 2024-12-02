@@ -98,24 +98,36 @@ function validateVocabularyData(data) {
 Search for vocabulary based on `query`. Returns vocabulary with chinese/english/pinyin that matches `query`.
 
 Request Params:
-    /api/v1/:search_field/:search_query
-        valid search_fields: 'chinese_simplified', 'chinese_traditional', 'pinyin', 'english'
+    /api/v1/:search_field/
+        search_fields: 'chinese_simplified', 'chinese_traditional', 'pinyin', 'english'
+
+Request Body:
+    {
+    "search_query": <the string query>
+    "count": <number of entries to retrieve>
+    "offset": <offset from first row of retrieved list>
+    }
 
 Returns:
     200 OK: Success message
     500 INTERNAL ERROR: Error message
 */
 async function searchVocabulary(req, res) {
-    const {search_field, search_query } = req.params;
+    const {search_field, search_query, search_count, search_offset } = req.params;
+
+    console.log(search_field, search_query, search_count, search_offset)
 
     // check if valid
     if (!search_field || !search_query) {
         return res.status(400).json({ message: "Invalid search field or query" });
     }
-
+    let count, offset;
+    search_count ? count = search_count : count = 10;
+    search_offset ? offset = search_offset : offset = 0;
+    
     // query for vocab
     try {
-        const vocabulary = await vocabularyModel.searchVocabulary(search_query, search_field);
+        const vocabulary = await vocabularyModel.searchVocabulary(search_query, search_field, count, offset);
 
         res.status(200).json({vocabulary});
     } catch (error) {

@@ -59,21 +59,21 @@ async function addVocabulary(vocabularyData) {
 }
 
 // Search for vocabulary with chinese/pinyin/english that matches the `query`
-async function searchVocabulary(query, searchField = 'chinese_simplified') {
+async function searchVocabulary(query, searchField = 'chinese_simplified', count, offset) {
     let results;
 
     // First try to search by the specified searchField
     try {
-        results = await searchByField(query, searchField);
+        results = await searchByField(query, searchField, count, offset);
         
         // If no results are found and the searchField is "english", try "pinyin"
         if (results.length === 0 && searchField === 'english') {
-            results = await searchByField(query, 'pinyin');
+            results = await searchByField(query, 'pinyin', count, offset);
         }
         
         // If no results are found and the searchField is "pinyin", try "english"
         else if (results.length === 0 && searchField === 'pinyin') {
-            results = await searchByField(query, 'english');
+            results = await searchByField(query, 'english', count, offset);
         }
 
         // Return the results, which might be from the fallback search
@@ -84,8 +84,10 @@ async function searchVocabulary(query, searchField = 'chinese_simplified') {
     }
 }
 
-async function searchByField(query, searchField) {
+// search the vocabulary table by a particular column (`searchField`)
+async function searchByField(query, searchField, count, offset) {
     const validFields = ['chinese_simplified', 'chinese_traditional', 'pinyin', 'english'];
+    console.log(count, offset)
 
     // Validate the searchField
     if (!validFields.includes(searchField)) {
@@ -99,21 +101,24 @@ async function searchByField(query, searchField) {
         // match query with or without tone numbers for pinyin
         sqlQuery = `
             SELECT * FROM vocabulary
-            WHERE REPLACE(pinyin, '1', '') 
+            WHERE REPLACE(pinyin, ' ', '') 
                   LIKE ? OR 
-                  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(pinyin, '1', ''), '2', ''), '3', ''), '4', ''), '5', '') LIKE ?
+                  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(pinyin, ' ', ''), '1', ''), '2', ''), '3', ''), '4', ''), '5', '') LIKE ?
+            LIMIT ${count} OFFSET ${offset}
         `;
-        params = [`%${query}%`, `%${query}%`];
+        params =  [`%${query}%`, `%${query}%`];
     } else {
-        // Standard query for other fields
+        // Standard query for other fields (POTENTIAL SQL INJECTION?)
         sqlQuery = `
             SELECT * FROM vocabulary
             WHERE ${searchField} LIKE ?
+            LIMIT ${count} OFFSET ${offset}
         `;
         params = [`%${query}%`];
     }
 
     try {
+        console.log(sqlQuery, params)
         const [rows] = await pool.execute(sqlQuery, params);
         return rows; // Return all matching rows
     } catch (error) {
