@@ -1,29 +1,38 @@
 
 .vocab-body {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background: var(--background-secondary-color);
     margin-top: 0.75rem;
     border-top: 1px solid #ccc;
     padding-top: 0.5rem;
-    width: 100%;
   }
-  
-  .vocab-tabs {
+
+  .tabs {
     display: flex;
     justify-content: space-around;
     margin-bottom: 0.5rem;
   }
   
-  .tab-button {
-    padding: 0.5rem 0.5rem;
-    width: 100%;
+  .tabs button {
+    padding: 8px 16px;
     border: none;
-    background-color: #eaeaea;
+    background: none;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
-  .tab-button.active {
-    background-color: #ddd;
+
+  .tabs .active {
     font-weight: bold;
+    border-bottom: 2px solid var(--highlight-color);
+  }
+  
+  .tab-content .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
   }
   
   .vocab-tab-content {
@@ -31,3 +40,4 @@
     border: 0px solid #e0e0e0;
     background-color: #f0f0f0;
   }
+  

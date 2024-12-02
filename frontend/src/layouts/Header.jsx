@@ -10,7 +10,7 @@ function Header() {
 
   return (
     <header className="header">
-      <header className="title">Woo!</header>
+      <header className="icon">陳</header>
       <button className="profile-btn" onClick={toggleProfilePanel}>
         Profile
       </button>

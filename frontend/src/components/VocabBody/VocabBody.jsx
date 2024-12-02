@@ -7,27 +7,27 @@ const VocabBody = ({ vocab }) => {
 
     return (
         <div className="vocab-body">
-          <div className="vocab-tabs">
+          <div className="tabs">
             <button
-              className={`tab-button ${activeTab === "definition" ? "active" : ""}`}
+              className={activeTab === "definition" ? "active" : ""}
               onClick={() => setActiveTab("definition")}
             >
               Definition
             </button>
             <button
-              className={`tab-button ${activeTab === "radicals" ? "active" : ""}`}
+              className={activeTab === "radicals" ? "active" : ""}
               onClick={() => setActiveTab("radicals")}
             >
               Radicals
             </button>
             <button
-              className={`tab-button ${activeTab === "related" ? "active" : ""}`}
+              className={activeTab === "related" ? "active" : ""}
               onClick={() => setActiveTab("related")}
             >
               Related
             </button>
             <button
-              className={`tab-button ${activeTab === "sentences" ? "active" : ""}`}
+              className={activeTab === "sentences" ? "active" : ""}
               onClick={() => setActiveTab("sentences")}
             >
               Sentences

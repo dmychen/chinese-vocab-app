@@ -1,25 +1,13 @@
-.page {
-    padding: 20px; /* 20px margin around the whole page */
-    font-family: Arial, sans-serif;
-  }
-  
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-  }
-
 .tabs {
   display: flex; /* Ensure the tabs are displayed in a row */
   gap: 20px; /* Space between each tab */
-  border-bottom: 2px solid #333; /* Thin line under the tabs */
+  border-bottom: 2px solid var(--line-color); /* Thin line under the tabs */
 }
   
 .tab {
   padding: 10px 20px; /* Add padding to the tabs */
   cursor: pointer;
-  font-size: 16px;
+  font-size: var(--text3);
   text-align: center;
   transition: all 0.3s ease;
   display: inline-block;
@@ -29,20 +17,19 @@
       display: block; /* Make the <NavLink> behave like a block-level element */
       padding: 10px; /* Ensure the padding is inside the link */
       text-decoration: none; /* Remove the underline */
-      color: inherit; /* Use the color of the <li> or other styles */
       width: 100%; /* Ensure the link spans the entire width of the <li> */
       height: 100%; /* Ensure the link spans the entire height of the <li> */
     }
     
     .tab-link:hover {
-      color: #007bff; /* Highlight color on hover */
-      background-color: #c8d8e9; /* Light background on hover */
-      text-shadow: 1px 0px 0px #007bff; /* Bold text for active link */
+      color: white; /* Highlight color on hover */
+      background-color: var(--secondary-color-hover); /* Light background on hover */
+      text-shadow: 1px 0px 0px white; /* Bold text for active link */
       border-radius: 5px; /* Optional: Rounded corners for the active link */
     }
     
     .tab-link.active {
-      background-color: #007bff; /* Highlight the active tab */
+      background-color: var(--secondary-color); /* Highlight the active tab */
       color: white; /* Make the text white for selected tab */
       text-shadow: 1px 0px 0px white;
       border-radius: 5px; /* Optional: Rounded corners for the active link */

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import "./Flashcard.css";
 
-const Flashcard = ({ vocab, flipped, setFlipped }) => {
+const Flashcard = ({ vocab }) => {
+  const [flipped, setFlipped] = useState(false); // track whether flashcard is flipped
   const handleFlip = () => setFlipped(!flipped);
 
   return (

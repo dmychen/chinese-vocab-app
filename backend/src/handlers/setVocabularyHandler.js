@@ -43,11 +43,6 @@ async function fetchSetVocabulary(req, res) {
 
         // If vocab_id is not provided, fetch all vocabulary for the set
         const vocabulary = await setVocabularyModel.fetchSetVocabulary(set_id);
-
-        if (!vocabulary.length) {
-            console.log(`--no vocab found`)
-            return res.status(404).json({ error: 'No vocabulary found for this set.' });
-        }
         res.status(200).json({ vocabulary });
     } catch (error) {
         console.error('Error in fetchSetVocabularyHandler:', error);

@@ -11,7 +11,7 @@ import "./Library.css";
 function Library() {
   return (
     <div className="page">
-      <header className="title">Your Library</header>
+      <h1 className="title">Your Library</h1>
       <TabNavbar /> {/* Navigate between the different tabs */}
       <Outlet /> {/* Navigate to a subpage based on the selected tab */}
     </div>

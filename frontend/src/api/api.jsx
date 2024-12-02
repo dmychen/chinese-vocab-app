@@ -41,7 +41,6 @@ export const getSetVocabulary = async (setId) => {
       const response = await api.get(`/sets/${setId}/vocabulary`);
       return response.data;
     } catch (error) {
-      console.error("Error fetching sets:", error.response?.data || error.message);
       throw error; // throw error for handling in components or loaders
     }
 };

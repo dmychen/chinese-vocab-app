@@ -87,7 +87,6 @@ async function searchVocabulary(query, searchField = 'chinese_simplified', count
 // search the vocabulary table by a particular column (`searchField`)
 async function searchByField(query, searchField, count, offset) {
     const validFields = ['chinese_simplified', 'chinese_traditional', 'pinyin', 'english'];
-    console.log(count, offset)
 
     // Validate the searchField
     if (!validFields.includes(searchField)) {
@@ -118,7 +117,6 @@ async function searchByField(query, searchField, count, offset) {
     }
 
     try {
-        console.log(sqlQuery, params)
         const [rows] = await pool.execute(sqlQuery, params);
         return rows; // Return all matching rows
     } catch (error) {
@@ -126,7 +124,6 @@ async function searchByField(query, searchField, count, offset) {
         throw error;
     }
 }
-
 
 module.exports = {
     fetchVocabularyById,

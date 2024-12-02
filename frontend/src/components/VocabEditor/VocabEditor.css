@@ -20,7 +20,8 @@
   }
   
   .tabs .active {
-    border-bottom: 2px solid blue;
+    font-weight: bold;
+    border-bottom: 2px solid var(--highlight-color);
   }
   
   .tab-content .row {
@@ -51,9 +52,13 @@
     margin-top: 16px;
     padding: 8px 16px;
     border: none;
-    background: blue;
+    background: var(--secondary-color);
     color: white;
     border-radius: 4px;
     cursor: pointer;
+  }
+
+  .submit-button:hover {
+    background: var(--secondary-color-hover);
   }
   

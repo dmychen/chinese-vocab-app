@@ -1,6 +1,5 @@
 /* Main container */
 .practice-page-container {
-    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -9,9 +8,19 @@
 }
 
 /* Header styles */
+.practice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.header-left {
+  flex-direction: row;
+}
+
 .header h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
+    font-size: var(--text1);
 }
 
 .header .description {

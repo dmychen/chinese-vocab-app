@@ -9,7 +9,7 @@ Dictionary page
 function Dictionary() {
   return (
     <div className="page">
-      <header className="title">Vocab Search</header>
+      <h1 className="title">Vocab Search</h1>
 
       <Outlet />
     </div>

@@ -162,7 +162,7 @@ const VocabSearch = () => {
                 {vocabList.length > 0 ? (
                     vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} handleAddVocab={handleAddVocab}/> ))
                     ) : (
-                    <p>No vocab found</p>
+                    <p className="no-vocab">No vocab found</p>
                 )}
             </div>
         </div>
