@@ -111,12 +111,20 @@ const Practice = () => {
         }
     }
 
+    const handleAddVocab = () => {
+        
+    }
+
+    const handleTogglePinyin = () => {
+        alert("not implemented!")
+    }
+
     return (
         <div className="practice-page-container">
             {/* Header */}
             <div className="practice-header">
                 <div className="header-left">
-                    <button onClick={() => navigate(-1)}>{"<"}</button>
+                    <button onClick={() => navigate(-1)}>{"←"}</button>
                     <h1>{set.name}</h1>
                 </div>
                 <p className="description">{set.description}</p>
@@ -133,19 +141,20 @@ const Practice = () => {
                 
                 <div className="flashcard-column">
                     {currentVocab ? < Flashcard vocab={currentVocab} /> : <p>No Vocab in this Set</p>}
-                    <button className="button" onClick={handlePreviousVocab}>
-                            Prev
-                    </button>
-                    <button className="button" onClick={handleNextVocab}>
-                            Next
-                    </button>
+                    <div className="flashcard-buttons">
+                        <button className="button" onClick={handlePreviousVocab}>
+                                {"< Prev"}
+                        </button>
+                        <button className="button" onClick={handleNextVocab}>
+                                {"Next >"}
+                        </button>
+                    </div>
                 </div>
 
                 <div className="button-column">
-                    <Form method="post">
-                        <button className="button" type="submit">Add Vocab</button>
-                    </Form>
-                    
+                    <button onClick={handleAddVocab}>Add Vocab</button>                    
+                    <button onClick={handleTogglePinyin}>Toggle Pinyin</button>    
+                    <button onClick={handleTogglePinyin}>Not Implemented</button>    
                 </div>
             </div>
         </div>

@@ -1,10 +1,5 @@
-/* Main container */
 .practice-page-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  height: 80%;
 }
 
 /* Header styles */
@@ -16,16 +11,36 @@
 }
 
 .header-left {
-  flex-direction: row;
+  display: flex;
+  align-items: center;
 }
 
-.header h1 {
+.header-left button {
+  background: none;       /* Removes background color */
+  margin-right: 5px; /* Space between button and h1 */
+  color: var(--highlight-color);
+  padding: 5px 5px;  
+  border: none;
+  font-size: var(--text2);
+  font-weight: 550;
+
+}
+.header-left button:hover {
+  font-weight: 1000;  
+}
+
+.practice-header h1 {
     font-size: var(--text1);
+    margin-bottom: 0px;
 }
 
-.header .description {
-    font-size: 16px;
-    color: #666;
+
+.practice-header .description {
+    font-size: var(--text3);
+    color: var(--text-tertiary-color);
+    text-align: right; 
+    flex-grow: 1; 
+    margin-left: 20px;
 }
 
 /* Stats section */
@@ -34,8 +49,8 @@
     justify-content: space-between;
     font-size: 14px;
     color: #555;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 2px solid var(--line-color);
+    border-bottom: 2px solid var(--line-color);
     padding: 10px 0;
 }
 
@@ -53,38 +68,50 @@
   
   .flashcard-column {
     flex: 1; /* Take up the remaining space */
+    height: 100%;
     flex-direction: column;
     display: flex;
     justify-content: center; /* Center the flashcard horizontally */
     align-items: center; /* Center the flashcard vertically */
   }
-  .flashcard-column.button {
-    padding: 10px;
-    margin-top: 10px;
+  .flashcard-buttons {
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 5px;
     font-size: 1rem;
     cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #f5f5f5;
-    border-radius: 5px;
+  }
+
+  .flashcard-buttons button {
+    border: none;
+    background-color: var(--button-secondary-color);
+    border-radius: var(--button-rounding);
+    padding: 6px 10px;
+    margin: 0px 5px;
+    font-size: var(--text3);
+    font-weight: 550;
+    cursor: pointer;
   }
   
   .button-column {
-    width: 200px; /* Fixed width for the button column */
+    width: 30%; /* Fixed width for the button column */
+    margin: 16px 0px 0px 5%;
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* Align buttons to the right */
     gap: 10px; /* Add spacing between buttons */
   }
   
-  .button-column.button {
+  .button-column button {
     width: 100%; /* Make buttons take up the full column width */
-    padding: 10px;
-    font-size: 1rem;
+    padding: 8px;
+    font-size: var(--text3);
+    font-weight: 550;
     cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    transition: background-color 0.2s ease;
+    border: none;
+    background-color: var(--button-secondary-color);
+    border-radius: var(--button-rounding);
+    transition: background-color 0.3s ease;
   }
   
   .button-column button:hover {

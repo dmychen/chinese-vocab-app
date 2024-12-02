@@ -5,7 +5,7 @@
     height: 350px; /* Taller than wide */
     padding: 10px;
     background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    border: 1.5px solid var(--line-color);
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
@@ -14,11 +14,11 @@
     justify-content: space-between;
     flex-direction: column;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .set:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -51,20 +51,30 @@
     margin-top: auto; /* Pushes actions to the bottom */
 }
 
-.edit-button,
-.delete-button {
-    padding: 8px 12px;
+.set .edit-button,
+.set .delete-button {
+    padding: 8px 8px;
     border: none;
     border-radius: var(--button-rounding);
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.edit-button {
-    background-color: var(--button-primary-color); /* Green */
+.set .edit-button {
+    background-color: var(--secondary-color); /* Green */
     color: black;
+    font-weight: 550;
 }
 
-.delete-button {
-    background-color: #f44336; /* Red */
+.set .edit-button:hover {
+    background-color: var(--secondary-color-hover); /* Green */
+}
+
+.set .delete-button {
+    background-color: #e4665d; /* Red */
     color: white;
+    font-weight: 550;
+}
+.set .delete-button:hover {
+    background-color: #cd544b; /* Red */
 }

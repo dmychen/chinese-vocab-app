@@ -1,36 +1,40 @@
 .tabs {
   display: flex; /* Ensure the tabs are displayed in a row */
+  justify-content: space-around;
   gap: 20px; /* Space between each tab */
   border-bottom: 2px solid var(--line-color); /* Thin line under the tabs */
 }
   
 .tab {
-  padding: 10px 20px; /* Add padding to the tabs */
+  padding: 10px 10px; /* Add padding to the tabs */
+  color: var(--secondary-color);
+  background-clip: content-box;
   cursor: pointer;
   font-size: var(--text3);
+  font-weight: bold;
   text-align: center;
   transition: all 0.3s ease;
   display: inline-block;
+  
 }
 
-    .tab-link {
-      display: block; /* Make the <NavLink> behave like a block-level element */
-      padding: 10px; /* Ensure the padding is inside the link */
-      text-decoration: none; /* Remove the underline */
-      width: 100%; /* Ensure the link spans the entire width of the <li> */
-      height: 100%; /* Ensure the link spans the entire height of the <li> */
-    }
+.tab:has(.active) {
+  border-bottom: 2px solid var(--highlight-color);
+}
+
+.tab-link {
+  display: block; /* Make the <NavLink> behave like a block-level element */
+  padding: 8px; /* Ensure the padding is inside the link */
+}
     
-    .tab-link:hover {
-      color: white; /* Highlight color on hover */
-      background-color: var(--secondary-color-hover); /* Light background on hover */
-      text-shadow: 1px 0px 0px white; /* Bold text for active link */
-      border-radius: 5px; /* Optional: Rounded corners for the active link */
-    }
+.tab-link:hover {
+  color: var(--highlight-color); /* Highlight color on hover */
+  background-color: var(--secondary-color-hover); /* Light background on hover */
+  border-radius: var(--tab-rounding);
+}
     
-    .tab-link.active {
-      background-color: var(--secondary-color); /* Highlight the active tab */
-      color: white; /* Make the text white for selected tab */
-      text-shadow: 1px 0px 0px white;
-      border-radius: 5px; /* Optional: Rounded corners for the active link */
-    }
+.tab-link.active {
+  background-color: var(--secondary-color); /* Highlight the active tab */
+  color: var(--highlight-color); /* Make the text white for selected tab */
+  border-radius: var(--tab-rounding);
+}

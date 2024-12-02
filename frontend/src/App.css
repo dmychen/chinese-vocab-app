@@ -10,24 +10,32 @@
 
     
     --background-color: white;
+    --background-secondary-color: white;
+    --background-tertiary-color: #f0f0f0;
     --highlight-color: #296990;
 
     --highlight-color-hover: #34759d;
     --background-secondary-color: #fafafa;
     
     /* TEXT */
-    --text-color: #0e2736;
+    --text-color: #0c0f11;
     --text-secondary-color: #b4d6e3;
-    --text-secondary-color-hover: rgb(12, 80, 12);
+    --text-secondary-color-hover: rgb(91, 130, 186);
+    --text-tertiary-color: #626262;
 
-    --line-color: #0e2736;
+
+    --line-color: #e5ebee;
+    --border-color: #f1f5f7;
+
 
     /* BUTTONS */
     --button-primary-color: #45b849;
     --button-primary-color-hover: #45a049;
-    --button-secondary-color: #bcbcbc;
+
+    --button-secondary-color: #e8e8e8;
     --button-secondary-color-hover: #888888;
     --button-rounding: 4px;
+    --tab-rounding: 16px;
 
     /* SIZING */
     --text1: 30px;

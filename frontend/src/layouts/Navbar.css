@@ -58,10 +58,10 @@
   }
   
   .nav-link:hover {
-    color: var(--text-secondary-color-hover); /* Highlight color on hover */
+    color: var(--highlight-color); /* Highlight color on hover */
     background-color: #d2e8f5; 
-    border-radius: 16px;
     font-weight: bold; /* Bold text for active link */
+    border-radius: var(--tab-rounding);
   }
   
   /* Styles for the active link */
@@ -69,7 +69,7 @@
     color: var(--highlight-color);
     background-color: #b2d1e2;
     font-weight: bold; /* Bold text for active link */
-    border-radius: 16px;
+    border-radius: var(--tab-rounding);
   }
   
   .nav-link.active .nav-logo {

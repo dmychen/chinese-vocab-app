@@ -72,7 +72,7 @@ const FlashcardSets = () => {
             <header className="tab-header">
                 <p>My Sets</p>
                 <button 
-                    className="button" 
+                    className={isEditing ? "cancel" : "new-set"}
                     onClick={() => handleEditSet({
                         name: "",
                         description: "",

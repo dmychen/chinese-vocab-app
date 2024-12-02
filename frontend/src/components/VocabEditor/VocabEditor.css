@@ -5,13 +5,13 @@
     background: #f9f9f9;
   }
   
-  .tabs {
+  .small-tabs {
     display: flex;
     justify-content: space-around;
     margin-bottom: 16px;
   }
   
-  .tabs button {
+  .small-tabs button {
     padding: 8px 16px;
     border: none;
     background: none;
@@ -19,7 +19,7 @@
     cursor: pointer;
   }
   
-  .tabs .active {
+  .small-tabs .active {
     font-weight: bold;
     border-bottom: 2px solid var(--highlight-color);
   }
@@ -39,12 +39,13 @@
   
   .field label {
     font-size: 12px;
-    color: #666;
+    margin-bottom: 3px;
+    color: var(--text-tertiary-color);
   }
   
   .field input {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--line-color);
     border-radius: 4px;
   }
   
@@ -52,13 +53,13 @@
     margin-top: 16px;
     padding: 8px 16px;
     border: none;
-    background: var(--secondary-color);
+    background: var(--highlight-color);
     color: white;
     border-radius: 4px;
     cursor: pointer;
   }
 
   .submit-button:hover {
-    background: var(--secondary-color-hover);
+    background: var(--highlight-color-hover);
   }
   

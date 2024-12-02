@@ -7,7 +7,7 @@ const VocabBody = ({ vocab }) => {
 
     return (
         <div className="vocab-body">
-          <div className="tabs">
+          <div className="small-tabs">
             <button
               className={activeTab === "definition" ? "active" : ""}
               onClick={() => setActiveTab("definition")}

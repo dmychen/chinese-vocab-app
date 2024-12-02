@@ -3,28 +3,28 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    background: var(--background-secondary-color);
     margin-top: 0.75rem;
-    border-top: 1px solid #ccc;
+    border-top: 2px solid var(--line-color);
     padding-top: 0.5rem;
   }
 
-  .tabs {
+  .small-tabs {
     display: flex;
     justify-content: space-around;
     margin-bottom: 0.5rem;
+    border-bottom: 2px solid var(--line-color);
   }
   
-  .tabs button {
+  .small-tabs button {
     padding: 8px 16px;
     border: none;
     background: none;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
   }
 
-  .tabs .active {
+  .small-tabs .active {
     font-weight: bold;
     border-bottom: 2px solid var(--highlight-color);
   }
@@ -37,7 +37,7 @@
   
   .vocab-tab-content {
     padding: 0.5rem;
-    border: 0px solid #e0e0e0;
-    background-color: #f0f0f0;
+    border-radius: var(--button-rounding);
+    background-color: var(--background-tertiary-color);
   }
   

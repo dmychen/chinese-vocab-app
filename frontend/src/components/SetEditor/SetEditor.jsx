@@ -37,7 +37,7 @@ const handleSubmit = async () => {
 return (
     <div className="set-editor">
     {/* Tabs */}
-    <div className="tabs">
+    <div className="small-tabs">
         <button
         className={activeTab === "description" ? "active" : ""}
         onClick={() => handleTabClick("description")}

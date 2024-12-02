@@ -45,7 +45,7 @@ const VocabEditor = ({ vocab, onSubmit }) => {
   return (
     <div className="vocab-editor">
       {/* Tabs */}
-      <div className="tabs">
+      <div className="small-tabs">
         <button
           className={activeTab === "definition" ? "active" : ""}
           onClick={() => handleTabClick("definition")}

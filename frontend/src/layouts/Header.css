@@ -5,7 +5,7 @@
     align-items: center;
     padding: 20px;
     background-color: var(--background-color);
-    border-bottom: 2px solid #e5ebee;
+    border-bottom: 2px solid var(--line-color);
     margin: 0;
   }
   
@@ -13,6 +13,7 @@
     font-size: 36px;
     color: var(--highlight-color);
     font-weight: bold;
+    cursor: pointer;
     margin: 0;
   }
   
@@ -21,9 +22,10 @@
     border-radius: var(--button-rounding);
     border: none;
     background-color: var(--highlight-color);
-    color: #edf2f4;
+    color: white;
     cursor: pointer;
     font-size: var(--text3);
+    font-weight: bold;
     transition: background-color 0.3s ease;
   }
   
@@ -36,25 +38,26 @@
     position: absolute;
     top: 70px; 
     right: 20px;
-    background-color: var(--secondary-color);
-    color: var(--text-secondary-color);
+    background-color: var(--background-tertiary-color);
+    color: var(--text-tertiary-color);
     padding: 20px;
     width: 200px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 10; /* Ensure the panel is above other content */
-    border-radius: 8px;
+    border-radius: var(--button-rounding);
   }
   
   .profile-panel button {
-    margin-top: 10px;
-    background-color: #777;
+    margin-top: 16px;
+    background-color: var(--button-primary-color);
     border: none;
     color: white;
     cursor: pointer;
-    padding: 10px;
+    border-radius: var(--button-rounding);
+    padding: 7px;
   }
   
   .profile-panel button:hover {
-    background-color: #999;
+    background-color: var(--button-primary-color-hover);
   }
   

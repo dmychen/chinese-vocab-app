@@ -48,13 +48,13 @@ useEffect(() => {
 
 
 return (
-    <div className={`vocab-container ${isExpanded ? "expanded" : ""}`} onClick={!isExpanded ? toggleExpand : null}>
+    <div className={`vocab-container ${isExpanded ? "expanded" : ""}`}>
     {/* Display Editor or normal Vocab component */}
     {isEditing ? 
         <VocabEditor vocab={ vocab } onSubmit={toggleEditing} /> :
         (<>
         {/* Normal Vocab Display */}
-        <div className="vocab-header">
+        <div className="vocab-header" onClick={toggleExpand}>
             <div className="vocab-hero">
                 {/* Chinese Simplified and Traditional */}
                 <div className="chinese">

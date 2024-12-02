@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1.5px solid var(--border-color);
     background-color: var(--background-secondary-color);
     border-radius: 6px;
 }
@@ -47,13 +47,15 @@
     justify-content: left;
     width: 100%;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     align-items: center;
     margin-top: 8px;
 }
 
 .pinyin {
     font-size: var(--text3);
-    color: #555;
+    color: var(--text-tertiary-color);
     margin-right: 4px;
 }
 
@@ -72,28 +74,31 @@
     justify-content: flex-end;
 }
 
-.add-button {
+.vocab-actions .add-button {
     padding: 5px 10px;
     background-color: var(--button-primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--button-rounding);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--text3);
+    font-weight: 550;
 }
 
 .add-button:hover {
-    background-color: var(--button-primary-color);
+    background-color: var(--button-primary-color-hover);
 }
 
-.edit-button {
+.vocab-actions .edit-button {
     padding: 5px 10px;
     background-color: var(--secondary-color);
     color: var(--text-color);
     border: none;
     border-radius: var(--button-rounding);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--text3);
+    font-weight: 550;
+    transition: background-color 0.3s ease;
 }
 
 .edit-button:hover {
@@ -113,16 +118,16 @@
     width: 10%;
     justify-content: center;
     margin-top: 0.5rem;
-    background-color: var(--secondary-color);
     border-radius: var(--button-rounding);
     border: none;
-    padding: 0.25rem 1rem;
+
     cursor: pointer;
     font-size: 0.75rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-weight: 550;
+    transition: all 0.4s ease;
   }
   
   .close-button:hover {
-    background-color: var(--secondary-color-hover);
+    font-size: 1rem;
+    font-weight: 1000;
   }

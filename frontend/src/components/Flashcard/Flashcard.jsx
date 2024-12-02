@@ -6,11 +6,11 @@ const Flashcard = ({ vocab }) => {
   const handleFlip = () => setFlipped(!flipped);
 
   return (
-    <div className="flashcard-container" onClick={handleFlip}>
+    <div className={`flashcard-container ${flipped ? 'flashcard-container-flipped' : ''}`}  onClick={handleFlip}>
       {!flipped ? (
         <div className="flashcard front">
           <div className="flashcard-chinese">{vocab.chinese_simplified}</div>
-          <div className="difficulty">{vocab.difficulty ? "Difficulty: " + vocab.difficulty : "..."}</div>
+          <div className="difficulty">{vocab.difficulty ? "Difficulty: " + vocab.difficulty : ""}</div>
         </div>
       ) : (
         <div className="flashcard back">

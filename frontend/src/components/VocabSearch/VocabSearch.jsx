@@ -58,7 +58,6 @@ const VocabSearch = () => {
     const displayLimit = DEFAULT_SEARCH_PAGE_SIZE; // number of vocab entries to display at a time
     const submit = useSubmit(); // Dynamically trigger loader/action
 
-
     const initialVocabList = useLoaderData(); // Data from the loader on page load
     const updatedVocabList = useActionData(); // Data from the action after a search
     const vocabList = updatedVocabList || initialVocabList; // Use dynamic data if available
