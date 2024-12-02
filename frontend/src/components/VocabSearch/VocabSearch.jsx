@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSubmit, useLoaderData, useActionData } from "react-router-dom";
 import { insertSetVocabulary, searchVocab } from "../../api/api";
-import { DEFAULT_SEARCH_INPUT_TYPE, DEFAULT_SEARCH_PAGE_SIZE, DEFAULT_SET_ID } from "../globals";
+import { DEFAULT_SEARCH_INPUT_TYPE, DEFAULT_SEARCH_PAGE_SIZE, DEFAULT_SET_ID } from "../../globals";
 import Vocab from "../Vocab/Vocab"
 import "./VocabSearch.css"
 

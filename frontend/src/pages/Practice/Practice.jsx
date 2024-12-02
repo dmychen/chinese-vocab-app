@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLoaderData, Form } from 'react-router-dom';
 import { getSetById, getSetVocabulary, insertVocabulary, insertSetVocabulary } from '../../api/api';
-import Flashcard from "./Flashcard"
+import Flashcard from "../../components/Flashcard/Flashcard"
 import './Practice.css';
 
-// on page load, retrieve set data
+// retrieve current set data on page load (sets and vocabulary_sets data)
 export async function loader({ params }) {
     try {
         const [setResult, vocabResult] = await Promise.allSettled([
@@ -22,6 +22,7 @@ export async function loader({ params }) {
     }
 }
 
+// idk yet
 export async function action({ params }) {
     try {
         const newVocab = {
@@ -39,6 +40,11 @@ export async function action({ params }) {
     return true;
 }
 
+/**
+ * Practice Page
+ * 
+ * Displays Flashcards for vocabulary associated with a particular set. 
+ */
 const Practice = () => {
     const { set, vocab } = useLoaderData(); // get set data
     const [flipped, setFlipped] = useState(false); // Whether flashcard is flipped

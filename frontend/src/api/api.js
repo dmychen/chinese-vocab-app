@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DEFAULT_SEARCH_INPUT_TYPE, DEFAULT_SEARCH_PAGE_SIZE } from "../components/globals";
+import { DEFAULT_SEARCH_INPUT_TYPE, DEFAULT_SEARCH_PAGE_SIZE } from "../globals";
 
 
 const api = axios.create({

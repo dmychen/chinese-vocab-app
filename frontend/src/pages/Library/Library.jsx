@@ -1,14 +1,19 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import "./Library.css"; // Styling
+import "./Library.css";
 
-// Display Flashcard Sets, Vocabulary Words, Characters, and Sentences
+/**
+ * Library Page
+ * 
+ * Displays 4 tabs: Current Sets, Vocabulary, Characters, and Sentences
+ * Depending on the selected tab, navigates to their corresponding (sub)pages
+ */
 function Library() {
   return (
     <div className="page">
       <header className="title">Your Library</header>
-      <TabNavbar /> {/* Tab Navbar */}
-      <Outlet /> {/* Render the content based on the selected tab */}
+      <TabNavbar /> {/* Navigate between the different tabs */}
+      <Outlet /> {/* Navigate to a subpage based on the selected tab */}
     </div>
   );
 }

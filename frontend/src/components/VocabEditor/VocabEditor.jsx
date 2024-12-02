@@ -2,7 +2,14 @@ import { useState } from "react";
 import { insertVocabulary } from "../../api/api";
 import "./VocabEditor.css"
 
-
+/**
+ * Vocab Editor
+ * 
+ * Allows a user to edit a vocab object and updates the vocabulary entry in the database (TODO: rn just inserts a new vocab entry lol)
+ * 
+ * @param {Object} vocab - vocab object to edit
+ * @param {function} onSubmit - callback function to determine parent behavior after submission
+ */
 const VocabEditor = ({ vocab, onSubmit }) => {
   const [activeTab, setActiveTab] = useState("definition"); // Track the active tab
   const [editedVocab, setEditedVocab] = useState({

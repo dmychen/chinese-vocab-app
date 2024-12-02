@@ -3,13 +3,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './App.css';
 
 import Home from "./pages/Home";
-import Dictionary from "./pages/Dictionary";
+import Dictionary from "./pages/Dictionary/Dictionary";
 import Library from "./pages/Library/Library";
 import Stats from "./pages/Stats";
 import Settings from "./pages/Settings";
 import Practice, { loader as practiceLoader, action as practiceAction } from "./pages/Practice/Practice"
 import Root from "./layouts/Root"
-import FlashcardSets, { loader as setsLoader, action as setAction } from "./pages/Library/FlashcardSets"
+import FlashcardSets, { loader as setsLoader } from "./pages/Sets/Sets"
 import Vocabulary from "./pages/Library/Vocabulary";
 import Characters from "./pages/Library/Characters";
 import Sentences from "./pages/Library/Sentences";
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       { path: "library", element: <Library />, 
         children: [
-          { path: "sets", element: <FlashcardSets />, loader: setsLoader, action: setAction },
+          { path: "sets", element: <FlashcardSets />, loader: setsLoader, },
           { path: "vocabulary", element: <Vocabulary />, },
           { path: "characters", element: <Characters />, },
           { path: "sentences", element: <Sentences />, },
