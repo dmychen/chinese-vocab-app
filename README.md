@@ -14,13 +14,14 @@ This app combines a Chinese-English dictionary with a flashcard system built for
 
 1) Create a new database in MySQL Workbench or whatever service you are using.
 
-2) Initialize the database for this app (navigate first to `/backend/init_db`):  
+2) Initialize the database for the app (navigate first to `/backend/init_db`):  
+
 - Open `init_db.py`. At the bottom of the script you can specify the root, user, password, and database name for the database you just made.
 - Run `python3 init_db.py`. (Make sure you have `mysql.connector` installed)
 
-> This will create the following tables: `vocabulary`, `characters`, `radicals`, `users`, `vocabulary_sets`, `vocabulary_characters`, `vocabulary_users`.
+> The script should create the following tables: `vocabulary`, `characters`, `radicals`, `users`, `vocabulary_sets`, `vocabulary_characters`, `vocabulary_users`.
 
-3) Import data into the database:
+3) Import all the vocab data into the database:
 - Open `import_data.py`, at the top of the script you can specify the root, user, etc...
 - Run `python3 import_data.py`. (Make sure you have `argparse`, and `parser` installed)
 
