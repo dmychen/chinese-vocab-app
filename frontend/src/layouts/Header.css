@@ -3,10 +3,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 8px;
     background-color: var(--background-color);
     border-bottom: 2px solid var(--line-color);
-    margin: 0;
+    margin: 0px 10px;
   }
   
   .icon {

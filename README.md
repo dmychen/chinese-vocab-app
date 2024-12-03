@@ -4,6 +4,12 @@ This app combines a Chinese-English dictionary with a flashcard system built for
 
 ## Running the App
 
+### Initialize Node
+
+1) Run `npm init` in "/backend" and "/frontend"
+
+2) Do you also need do `npm install`? Who knows.
+
 ### Initialize a MySQL database
 
 1) Create a new database in MySQL Workbench or whatever service you are using.
@@ -23,7 +29,7 @@ This app combines a Chinese-English dictionary with a flashcard system built for
 > `--count NUM` to specify the number of entries to import (cap the vocab imported to a certain number).
 > `-f FILE` to specify a file to import data from. The data must be formatted according to the cc-cedict model. By default, it will import './cc-cedict.txt'
 
-### Edit Some Settings
+### Edit Some App Settings
 
 1) Update the backend: (backend/src/) 
 - Update the database info in `db.js`.
@@ -32,11 +38,12 @@ This app combines a Chinese-English dictionary with a flashcard system built for
 2) Update the frontend: (frontend/src/)
 - Update `/api/api.jsx` to have the right localhost 
 
-All done!
 
+### Start the App
 
+Run `npm start` in both the backend and frontend subdirectories.
 
-## The Idea
+## The App Idea
 
 Goal: A flashcard app specifically for chinese vocabulary.
 
@@ -73,151 +80,3 @@ Goal: A flashcard app specifically for chinese vocabulary.
 5. Generate practice sentences with ChatGPT integration
     - Based on a flashcard set or other filtering.
     - Or on global flashcard database
-
-## The Implementation
-
-### **Frontend** (React)
-
-1. Use React Router for navigation
-2. Use Axios to communicate with the backend.
-3. UseContext/UseState/UseReduce for state management
-
-#### Pages
-
-TBD
-
-### **Backend** (Express)
-
-Establish endpoints that allow frontend to communicate with and manipulate the sql db.
-
-#### Endpoints
-
-**Vocabulary Management**
-
-POST /api/v1/vocabulary: Add new vocabulary.
-GET /api/v1/vocabulary: Get all vocabulary.
-PUT /api/v1/vocabulary/:id: Update vocabulary.
-DELETE /api/v1/vocabulary/:id: Delete vocabulary.
-
-**Flashcard Set Management**
-
-POST /api/sets: Create a new set.
-GET /api/sets: Get all sets.
-GET /api/sets/:id: Get vocabulary from a specific set.
-PUT /api/sets/:id: Update a set.
-DELETE /api/sets/:id: Delete a set.
-
-**Quiz Functionality**
-GET /api/quiz/random?setId=<set_id>: Get random words from a set.
-GET /api/quiz/spaced-repetition?setId=<set_id>: Fetch words using an algorithm.
-
-
-### **Database** (SQL)
-
-CC-CEDICT Database: [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict)
-Extra Chinese vocabulary from here: [pleco-chinese-dictionary](https://github.com/jimmy-zhening-luo/pleco-mega-big-chinese-dictionary/blob/master/README.md)
-
-Parsing CC-CEDICT: [Python-Script](https://github.com/rubber-duck-dragon/rubber-duck-dragon.github.io/blob/master/cc-cedict_parser/parser.py)
-
-**Characters**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each character.
-- `character_simplified` *(VARCHAR(10))*: The simplified version of the character.
-- `character_traditional` *(VARCHAR(10))*: The traditional version of the character.
-- `radical_simplified` *(VARCHAR(10))*: The simplified version of the radical.
-- `radical_traditional` *(VARCHAR(10))*: The traditional version of the radical.
-- `stroke_count_simplified` *(INT)*: The number of strokes in the character.
-- `stroke_count_traditional` *(INT)*: The number of strokes in the character.
-- `difficulty` *(INT, NULL)*: Difficulty rating of the character (e.g., 1-5).
-- `meaning` *(TEXT, NULL)*: The meaning of the character.
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the character record was created.
-- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the character record was last updated.
-
-**Radicals**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each radical.
-- `simplified_radical` *(VARCHAR(10), NULL)*: Simplified version of the radical.
-- `traditional_radical` *(VARCHAR(10), NULL)*: Traditional version of the radical.
-- `meaning` *(TEXT, NULL)*: The meaning of the radical.
-- `stroke_count_simplified` *(INT)*: The number of strokes in the radical.
-- `stroke_count_traditional` *(INT)*: The number of strokes in the radical.
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the radical record was created.
-- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the radical record was last updated.
-
-**Vocabulary**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each vocabulary word.
-- `chinese_simplified` *(TEXT)*: Simplified version of the word.
-- `chinese_traditional` *(TEXT, NULL)*: Traditional version of the word.
-- `pinyin` *(VARCHAR(100), NULL)*: Pinyin pronunciation of the word.
-- `english` *(TEXT, NULL)*: The meaning of the word.
-- `frequency` *(INT, NULL)*: Frequency of the word’s occurrence.
-- `difficulty` *(INT, NULL)*: Difficulty rating of the character (e.g., 1-5).
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the vocabulary record was created.
-- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the vocabulary record was last updated.
-
-**Sets**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each vocabulary set.
-- `name` *(VARCHAR(255), NOT NULL)*: Name of the vocabulary set.
-- `description` *(TEXT, NULL)*: Description of the vocabulary set.
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the set was created.
-- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the set was last updated.
-
-**Vocabulary_Characters**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each character-vocabulary relationship.
-- `vocabulary_id` *(INT, NOT NULL)*: Foreign key linking to the vocabulary table.
-- `character_id` *(INT, NOT NULL)*: Foreign key linking to the characters table.
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the vocabulary-character record was created.
-
-**Set_Vocabulary**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each set-vocabulary relationship.
-- `set_id` *(INT, NOT NULL)*: Foreign key linking to the sets table.
-- `vocabulary_id` *(INT, NOT NULL)*: Foreign key linking to the vocabulary table.
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the set-vocabulary record was created.
-
-**Reviews**
-- `id` *(INT, AUTO_INCREMENT, PRIMARY KEY)*: Unique identifier for each review record.
-- `vocabulary_id` *(INT, NOT NULL)*: Foreign key linking to the vocabulary table.
-- `user_id` *(INT, NOT NULL)*: Foreign key linking to the users table.
-- `last_reviewed` *(TIMESTAMP, NULL)*: Timestamp of the last review.
-- `review_interval` *(INT, DEFAULT 1)*: Number of days until the next review (spaced repetition).
-- `review_score` *(INT, NULL)*: Score indicating how well the word was recalled (e.g., 1-5).
-- `view_count` *(INT, DEFAULT 0)*: Number of times the word has been reviewed.
-- `next_review_date` *(TIMESTAMP, NULL)*: Calculated date for the next review.
-- `created_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)*: Timestamp when the review record was created.
-- `updated_at` *(TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)*: Timestamp when the review record was last updated.
-
-**Vocabulary Table**
-
-1. id (PRIMARY)  
-2. chinese (NOT NULL)  
-3. pinyin  
-4. english  
-5. radicals  
-6. frequency  
-7. stroke count  
-8. difficulty (HSK)  
-9. created_at TIMESTAMP
-10. updated_at TIMESTAMP
-
-**FlashcardSets Table**
-
-1. id (PRIMARY)  
-2. name (NOT NULL)  
-3. description  
-4. created_at TIMESTAMP  
-
-Vocabulary Table (many-to-many relationship)
-
-1. set_id REFERENCES flashcard_sets
-2. vocabulary_id REFERENCES vocabulary
-3. last_reviewed TIMESTAMP  
-4. review_interval INT  
-* PRIMARY KEY (set_id, vocabulary_id)
-
-
-
-
-
-
-
-        
-
-

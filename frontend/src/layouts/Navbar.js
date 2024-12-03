@@ -11,11 +11,11 @@ function Navbar() {
   };
 
   const navItems = [
-    { path: "/home", name: "Home", logo: "🏠" },
-    { path: "/dictionary/search", name: "Dictionary", logo: "📖" },
-    { path: "/library/sets", name: "Library", logo: "📚" },
-    { path: "/stats", name: "Stats", logo: "📊" },
-    { path: "/settings", name: "Settings", logo: "⚙️" },
+    { path: "/home", name: "Home", logo: "主" },
+    { path: "/dictionary/search", name: "Dictionary", logo: "詞" },
+    { path: "/library/sets", name: "Library", logo: "藏" },
+    { path: "/stats", name: "Stats", logo: "報" },
+    { path: "/settings", name: "Settings", logo: "設" },
   ];
 
   return (
