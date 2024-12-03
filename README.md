@@ -1,23 +1,40 @@
 # Devx Full Stack Project!  
 
-## Running this App
+This app combines a Chinese-English dictionary with a flashcard system built for practicing Chinese. It stores an extensive database of Chinese words, characters, and radicals, along with their English definitions and other information. The app allows users to search for vocabulary in Chinese, pinyin, or English. Users can "save" vocabulary, and can also add vocabulary to specific flashcard sets. The user can practice a flashcard set. The user can also change any vocab entry, or add new vocabulary to the database.
 
-### Initialize the MySQL database
+## Running the App
+
+### Initialize a MySQL database
 
 1) Create a new database in MySQL Workbench or whatever service you are using.
-2) Initialize the database: 
-- Edit `init_db.py`, at the bottom of the script you can specify the root, user, password, and database name for the database you made.
-- Run `python3 init_db.py`.
+
+2) Initialize the database for this app (navigate first to `/backend/init_db`):  
+- Open `init_db.py`. At the bottom of the script you can specify the root, user, password, and database name for the database you just made.
+- Run `python3 init_db.py`. (Make sure you have `mysql.connector` installed)
+
+> This will create the following tables: `vocabulary`, `characters`, `radicals`, `users`, `vocabulary_sets`, `vocabulary_characters`, `vocabulary_users`.
+
 3) Import data into the database:
-- Edit `import_data.py`, at the top of the script you can specify the root, user, etc...
-- Run `python3 import_data.py`. This may take a few seconds
+- Open `import_data.py`, at the top of the script you can specify the root, user, etc...
+- Run `python3 import_data.py`. (Make sure you have `argparse`, and `parser` installed)
 
-> I created a few options for `import_data.py`, since the import is rather large. You can specify the following:  
-> `-v` to show verbose output, listing every vocab entry that is added.
+> I created a few options for `import_data.py`, since the data import will usually be rather large. You can specify the following:  
+> `-v` to show verbose output, which lists every vocab entry that is imported.
 > `--count NUM` to specify the number of entries to import (cap the vocab imported to a certain number).
-> `-f FILE` to specify a file to import data from. The data must be formatted according to the cc-cedict model.
+> `-f FILE` to specify a file to import data from. The data must be formatted according to the cc-cedict model. By default, it will import './cc-cedict.txt'
 
-### 
+### Edit Some Settings
+
+1) Update the backend: (backend/src/) 
+- Update the database info in `db.js`.
+- Update the localhost and port number if neccessary in `index.js`.
+
+2) Update the frontend: (frontend/src/)
+- Update `/api/api.jsx` to have the right localhost 
+
+All done!
+
+
 
 ## The Idea
 

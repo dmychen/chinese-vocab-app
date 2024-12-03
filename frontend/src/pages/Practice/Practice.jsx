@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useLoaderData, Form, useNavigate } from 'react-router-dom';
+import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
 import { getSetById, getSetVocabulary, insertVocabulary, insertSetVocabulary } from '../../api/api';
 import Flashcard from "../../components/Flashcard/Flashcard"
 import './Practice.css';
+import VocabSearch from '../../components/VocabSearch/VocabSearch';
+import { DEFAULT_SET_ID } from '../../globals';
 
 // retrieve current set data on page load (sets and vocabulary_sets data)
 export async function loader({ params }) {
@@ -22,24 +24,6 @@ export async function loader({ params }) {
     }
 }
 
-// idk yet
-export async function action({ params }) {
-    try {
-        const newVocab = {
-            chinese_simplified: "快樂",
-            chinese_traditional: "快樂",
-            pinyin: "kuai4le4",
-            english: "happy",
-        }
-
-        const vocabResult = await insertVocabulary(newVocab);
-        const setResult = await insertSetVocabulary(params.setId, vocabResult.id)
-    } catch (error) {
-        console.error("Failed to insert vocab:", error);
-    }
-    return true;
-}
-
 /**
  * Practice Page
  * 
@@ -50,6 +34,7 @@ const Practice = () => {
     const [currentVocab, setCurrentVocab] = useState(null); // Current vocab to show
     const [usedVocab, setUsedVocab] = useState([]); // track used vocab words
     const [remainingVocab, setRemainingVocab] = useState([...vocab]); // Vocab that hasn't been used yet
+    const [isAddingVocab, setIsAddingVocab] = useState(false);
     const navigate = useNavigate();
     
     // Display a vocab word
@@ -111,20 +96,25 @@ const Practice = () => {
         }
     }
 
-    const handleAddVocab = () => {
-        
+    const toggleAddVocab = () => {
+        if (!isAddingVocab) navigate("search");
+        setIsAddingVocab(!isAddingVocab);
     }
 
     const handleTogglePinyin = () => {
-        alert("not implemented!")
+        alert("not implemented!");
     }
+
+    const handleNavigateBack = () => {
+        navigate("/library/sets");
+    } 
 
     return (
         <div className="practice-page-container">
             {/* Header */}
             <div className="practice-header">
                 <div className="header-left">
-                    <button onClick={() => navigate(-1)}>{"←"}</button>
+                    <button onClick={handleNavigateBack}>{"←"}</button>
                     <h1>{set.name}</h1>
                 </div>
                 <p className="description">{set.description}</p>
@@ -136,28 +126,38 @@ const Practice = () => {
                 <span>Last practiced: NOT DONE</span>
             </div>
 
-            {/* Flashcard Section */}
-            <div className="main-content">
-                
-                <div className="flashcard-column">
-                    {currentVocab ? < Flashcard vocab={currentVocab} /> : <p>No Vocab in this Set</p>}
-                    <div className="flashcard-buttons">
-                        <button className="button" onClick={handlePreviousVocab}>
-                                {"< Prev"}
-                        </button>
-                        <button className="button" onClick={handleNextVocab}>
-                                {"Next >"}
-                        </button>
+            {/* Flashcard Body */}
+            
+                <div className="main-content">
+                    {!isAddingVocab && 
+                        <div className="flashcard-column">
+                            {currentVocab ? < Flashcard vocab={currentVocab} /> : <p>No Vocab in this Set</p>}
+                            <div className="flashcard-buttons">
+                                <button className="button" onClick={handlePreviousVocab}>
+                                        {"< Prev"}
+                                </button>
+                                <button className="button" onClick={handleNextVocab}>
+                                        {"Next >"}
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    {/* Editor */}
+                    {isAddingVocab && 
+                        <Outlet context={{ defaultSetOnInsert: set.id }}/>
+                    }
+
+                    <div className="button-column">
+                        <button onClick={toggleAddVocab}>Add Vocab</button>                    
+                        <button onClick={handleTogglePinyin}>Toggle Pinyin</button>    
+                        <button onClick={handleTogglePinyin}>Not Implemented</button>    
                     </div>
                 </div>
+            
 
-                <div className="button-column">
-                    <button onClick={handleAddVocab}>Add Vocab</button>                    
-                    <button onClick={handleTogglePinyin}>Toggle Pinyin</button>    
-                    <button onClick={handleTogglePinyin}>Not Implemented</button>    
-                </div>
-            </div>
+            
         </div>
+
     );       
 };
 

@@ -17,6 +17,7 @@ import FlashcardSets, { loader as setsLoader } from "./pages/Sets/Sets"
 import Vocabulary from "./pages/Library/Vocabulary";
 import Characters from "./pages/Library/Characters";
 import Sentences from "./pages/Library/Sentences";
+import { DEFAULT_SET_ID } from "./globals";
 
 
 
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
       },
       { path: "settings", element: <Settings />, },
       { path: "stats", element: <Stats />, },
-      { path: "practice/:setId", element: <Practice />, loader: practiceLoader, action: practiceAction },
+      { path: "practice/:setId", element: <Practice />, loader: practiceLoader, 
+        children: [
+          { path: "search", element: <VocabSearch />, loader: searchLoader, action: searchAction },
+        ]
+      },
     ],
 
   },

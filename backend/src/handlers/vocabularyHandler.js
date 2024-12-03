@@ -115,8 +115,6 @@ Returns:
 async function searchVocabulary(req, res) {
     const {search_field, search_query, search_count, search_offset } = req.params;
 
-    console.log(search_field, search_query, search_count, search_offset)
-
     // check if valid
     if (!search_field || !search_query) {
         return res.status(400).json({ message: "Invalid search field or query" });

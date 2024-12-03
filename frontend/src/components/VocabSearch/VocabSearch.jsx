@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSubmit, useLoaderData, useActionData } from "react-router-dom";
+import { useSubmit, useLoaderData, useActionData, useOutletContext } from "react-router-dom";
 import { insertSetVocabulary, searchVocab } from "../../api/api";
 import { DEFAULT_SEARCH_INPUT_TYPE, DEFAULT_SEARCH_PAGE_SIZE, DEFAULT_SET_ID } from "../../globals";
 import Vocab from "../Vocab/Vocab"
@@ -58,6 +58,7 @@ const VocabSearch = () => {
     const displayLimit = DEFAULT_SEARCH_PAGE_SIZE; // number of vocab entries to display at a time
     const submit = useSubmit(); // Dynamically trigger loader/action
 
+    const { defaultSetOnInsert } = useOutletContext(); // The default set for this vocab search page
     const initialVocabList = useLoaderData(); // Data from the loader on page load
     const updatedVocabList = useActionData(); // Data from the action after a search
     const vocabList = updatedVocabList || initialVocabList; // Use dynamic data if available
@@ -85,11 +86,11 @@ const VocabSearch = () => {
     };
 
     // `AddVocab` button adds a vocab entry to the user's default set
-    const  handleAddVocab = async (e, vocab) => {
+    const handleAddVocab = async (e, vocab) => {
         e.stopPropagation()
         try {
-            // insert vocab into default set
-            const response = await insertSetVocabulary(DEFAULT_SET_ID, vocab.id) 
+            console.log(defaultSetOnInsert);
+            const response = await insertSetVocabulary(defaultSetOnInsert, vocab.id);
 
             // force render update
             const formData = new FormData();
@@ -159,7 +160,7 @@ const VocabSearch = () => {
             {/* Vocabulary List */}
             <div className="vocab-list">
                 {vocabList.length > 0 ? (
-                    vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} handleAddVocab={handleAddVocab}/> ))
+                    vocabList.map((vocab) => ( <Vocab key={vocab.id} vocab={vocab} handleAddVocab={handleAddVocab} defaultSetId={defaultSetOnInsert} /> ))
                     ) : (
                     <p className="no-vocab">No vocab found</p>
                 )}

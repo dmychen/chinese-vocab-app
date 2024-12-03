@@ -10,38 +10,35 @@ const api = axios.create({
     },
 });
 
-
-
-
 // Get a list of all sets
 export const getSets = async () => {
-  try {
+try {
     const response = await api.get("/sets");
     return response.data;
-  } catch (error) {
+} catch (error) {
     console.error("Error fetching sets:", error.response?.data || error.message);
     throw error; // throw error for handling in components or loaders
-  }
+}
 };
 
 // Get a set by its setId
 export const getSetById = async (id) => {
-  try {
+try {
     const response = await api.get(`/sets/${id}`);
     return response.data;
-  } catch (error) {
+} catch (error) {
     console.error("Error fetching set by ID:", error.response?.data || error.message);
     throw error;
-  }
+}
 };
 
 // Get the vocabulary corresponding to a particular setId
 export const getSetVocabulary = async (setId) => {
     try {
-      const response = await api.get(`/sets/${setId}/vocabulary`);
-      return response.data;
+    const response = await api.get(`/sets/${setId}/vocabulary`);
+    return response.data;
     } catch (error) {
-      throw error; // throw error for handling in components or loaders
+    throw error; // throw error for handling in components or loaders
     }
 };
 
@@ -84,7 +81,7 @@ Params:
         "pinyin": STRING,
         "english": STRING
         }
-      
+    
 Returns:
 
 */
@@ -108,10 +105,10 @@ export const insertVocabulary = async (vocab) => {
 
 /* 
 Params:
-  {
+{
     setId: Set to insert into
     vocabId: vocab to insert into set
-  }
+}
 */
 export const insertSetVocabulary = async (setId, vocabId) => {
     try {
@@ -123,21 +120,23 @@ export const insertSetVocabulary = async (setId, vocabId) => {
     }
 }
 
-// Function to fetch vocab from backend
+// fetch vocab from backend based on a search query
 export const searchVocab = async (query, count = DEFAULT_SEARCH_PAGE_SIZE, offset = 0, searchField = DEFAULT_SEARCH_INPUT_TYPE) => {
     let field = searchField;
     if (isChinese(query)) {
-      field = "chinese_simplified"
+    field = "chinese_simplified"
     }
     try {
-        console.log("SEARCHING FOR:", query, field, count, offset)
-      const response = await api.get(`/vocabulary/search/${field}/${query}/${count}/${offset}`);
-      return response.data.vocabulary;
+    const response = await api.get(`/vocabulary/search/${field}/${query}/${count}/${offset}`);
+    return response.data.vocabulary;
     } catch (error) {
-      console.error("Error searching for vocab:", error);
-      throw error;
+    console.error("Error searching for vocab:", error);
+    throw error;
     }
-  };
+};
+
+
+/* HELPER FUNCTIONS */
 
 // check if query is chinese
 function isChinese(str) {
@@ -145,24 +144,24 @@ function isChinese(str) {
     return chineseRegex.test(str);
 }
 
-// Check if a vocab object is contained within the "vocabulary_sets" table
-export const isSavedVocab = async (vocab) => {
-  if (!vocab || !vocab.id) {
+// Check if a vocab object is contained within the "vocabulary_sets" table, by default search all sets
+export const isSavedVocab = async (vocab, setId = -1) => {
+if (!vocab || !vocab.id) {
     throw new Error('Invalid vocab object');
-  }
+}
 
-  try {
-    const response = await api.get(`/sets/-1/vocabulary/${vocab.id}`);
+try {
+    const response = await api.get(`/sets/${setId}/vocabulary/${vocab.id}`);
     return true;
-  } catch (error) {
+} catch (error) {
     if (error.response?.status === 404) {
-      // If it's a 404, return false
-      return false;
+    // If it's a 404, return false
+    return false;
     } else {
-      // Throw an error for any other status codes
-      throw new Error(
+    // Throw an error for any other status codes
+    throw new Error(
         `Unexpected error occurred: ${error.response?.status || error.message}`
-      );
+    );
     }
-  }
+}
 }
